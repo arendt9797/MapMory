@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import HomePage from '../pages/HomePage'
-import CreatePlanPage from '../pages/CreatePlanPage'
-import DetailPlanPage from '../pages/DetailPlanPage'
-import MyPlanPage from '../pages/MyPlanPage'
-import SignInPage from '../pages/SignInPage'
-import SignUpPage from '../pages/SignUpPage'
+import HomePage from '../pages/HomePage';
+import CreatePlanPage from '../pages/CreatePlanPage';
+import DetailPlanPage from '../pages/DetailPlanPage';
+import MyPlanPage from '../pages/MyPlanPage';
+import SignInPage from '../pages/SignInPage';
+import SignUpPage from '../pages/SignUpPage';
 
 const router = createBrowserRouter([
   { path: '/', element: <HomePage /> },
