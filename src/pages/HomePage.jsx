@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 // import { headerLogo } from '/header-logo';
 const HomePage = () => {
   return (
-    <div className="container mx-auto flex flex-col items-center justify-center gap-20 h-[calc(100vh - 60px)]">
+    <div className="container h-full mx-auto flex flex-col items-center justify-center gap-20 min-h-[calc(100vh-60px)]">
       <p className="text-5xl text-primaryHover font-semibold ">
         <span className="text-secondary">MAP</span>에 <span className="text-secondary">MEMORY</span>를 더하다!
       </p>
