@@ -6,6 +6,7 @@ import MyPlanPage from '../pages/MyPlanPage';
 import SignInPage from '../pages/SignInPage';
 import SignUpPage from '../pages/SignUpPage';
 import Layout from '../components/layouts/Layout';
+import { CREATEPLAN, DETAILPLAN, MYPLAN, SIGNIN, SIGNUP } from '../constants/pagePaths';
 
 const router = createBrowserRouter([
   {
@@ -13,11 +14,11 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: '/createPlan', element: <CreatePlanPage /> },
-      { path: '/detailPlan/:id', element: <DetailPlanPage /> },
-      { path: '/myPlan', element: <MyPlanPage /> },
-      { path: '/signUp', element: <SignUpPage /> },
-      { path: '/signIn', element: <SignInPage /> }
+      { path: CREATEPLAN, element: <CreatePlanPage /> },
+      { path: `${DETAILPLAN}/:id`, element: <DetailPlanPage /> },
+      { path: MYPLAN, element: <MyPlanPage /> },
+      { path: SIGNUP, element: <SignUpPage /> },
+      { path: SIGNIN, element: <SignInPage /> }
     ]
   }
 ]);
