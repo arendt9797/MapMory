@@ -1,5 +1,5 @@
 const CreatePlanPage = () => {
-  return <div>CreatePlanPage</div>;
+  return <div>PlanPage</div>;
 };
 
 export default CreatePlanPage;
