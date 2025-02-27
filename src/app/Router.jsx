@@ -7,7 +7,6 @@ import SignInPage from '../pages/SignInPage';
 import SignUpPage from '../pages/SignUpPage';
 import Layout from '../components/layouts/Layout';
 
-
 const router = createBrowserRouter([
   {
     path: '/',

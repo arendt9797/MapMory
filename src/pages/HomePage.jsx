@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-// import { headerLogo } from '/header-logo';
 const HomePage = () => {
   return (
     <div className="container h-full mx-auto flex flex-col items-center justify-center gap-20 min-h-[calc(100vh-60px)]">
