@@ -8,8 +8,10 @@ const CreatePlanCreation = ({ setConfirmedMarkers, tempMarker, setTempMarker }) 
       { ...tempMarker, number: prev.length + 1 } // 확정 시 번호 부여
     ]);
 
-    setTempMarker(null); // 제출 후 임시 마커 제거
+    // 제출 후 임시 마커 제거
+    setTempMarker(null); 
   };
+  
   return (
     <div className="absolute top-5 right-5 w-96 h-72 bg-white border-4 border-secondary p-2 rounded-md">
       <h1>너가 찍은 곳은 여기야!</h1>
