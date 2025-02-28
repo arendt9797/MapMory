@@ -6,7 +6,7 @@
  *  내용이 들어가면 됩니다.
  * </Text>
  *
- * @prop {string} [fontSize] - 글자 크기 ( "xs" | "md" | "lg" | "xl" | "2xl" )
+ * @prop {string} [fontSize] - 글자 크기 ( "xs" | "sm" | "md" | "lg" | "xl" | "2xl" )
  * @prop {string} [textColor] - 색상 클래스명 ex)black, gray-500
  * @prop {string} [align] - 정렬 위치 ( "left" | "center" | "right" )
  */
@@ -14,6 +14,7 @@
 const Text = ({ fontSize, textColor, align, children }) => {
   const sizeValue = {
     xs: 'text-xs',
+    sm: 'text-sm',
     md: 'text-md',
     lg: 'text-lg',
     xl: 'text-xl',
