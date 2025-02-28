@@ -1,18 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
 import MyPlanCard from '../components/features/MyPlanCard';
-import { getMyPlans } from '../lib/apis/planApi';
+import useMyPlan from '../lib/hooks/useMyPlan';
 
 const MyPlanPage = () => {
   const testId = 'd0d35038-4aac-4eb1-a625-0775e2c64087';
 
-  const {
-    data: planData,
-    isPending: isDataPending,
-    isError: isDataError
-  } = useQuery({
-    queryFn: () => getMyPlans(testId),
-    queryKey: ['plans']
-  });
+  const { planData, isDataError, isDataPending } = useMyPlan(testId);
 
   return (
     <div className="p-10 flex flex-col justify-center items-center">
