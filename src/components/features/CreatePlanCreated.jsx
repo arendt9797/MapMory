@@ -1,9 +1,18 @@
-import React from 'react'
-
 const CreatePlanCreated = () => {
   return (
-    <div>CreatePlanCreated</div>
-  )
-}
+    <div className="absolute bottom-5 right-5 w-96 h-96 bg-white border-4 border-secondary p-2 rounded-md">
+      <div className="flex items-center gap-4">
+      <div
+        className="bg-white border-2 border-black p-2 rounded-full text-sm w-8 h-8 flex items-center justify-center"
+        >
+        1
+      </div>
+      <span>선택한 장소</span>
+      <span>선택한 날짜</span>
+      <span>선택한 시간</span>
+        </div>
+    </div>
+  );
+};
 
-export default CreatePlanCreated
+export default CreatePlanCreated;

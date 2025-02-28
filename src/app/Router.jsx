@@ -14,13 +14,13 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: CREATEPLAN, element: <CreatePlanPage /> },
       { path: `${DETAILPLAN}/:id`, element: <DetailPlanPage /> },
       { path: MYPLAN, element: <MyPlanPage /> },
       { path: SIGNUP, element: <SignUpPage /> },
       { path: SIGNIN, element: <SignInPage /> }
     ]
-  }
+  },
+  { path: CREATEPLAN, element: <CreatePlanPage /> },
 ]);
 
 const Router = () => {

@@ -1,15 +1,12 @@
 import { useEffect } from 'react';
 
-export const useMapClickListner = (mapRef, setMarkers) => {
+export const useMapClickListner = (mapRef, setMarker) => {
   useEffect(() => {
     window.naver.maps.Event.addListener(mapRef.current, 'click', (e) => {
-      setMarkers((prevMarkers) => [
-        ...prevMarkers,
-        {
-          position: e.coord,
-          number: prevMarkers.length + 1 // 클릭한 순서대로 번호 증가
-        }
-      ]);
+      setMarker({
+        position: e.coord,
+        number: null // 확정 전이므로 번호 없음
+      });
     });
   }, []);
 };
