@@ -4,6 +4,7 @@ import CardContainer from './CardContainer';
 import Title from '../../commons/Title';
 import ContentsContainer from './ContentsContainer';
 import Text from '../../commons/Text';
+import { DETAILPLAN } from '../../../constants/pagePaths';
 
 const MyPlanCard = ({ item }) => {
   const { id, title, detail_plans } = item;
@@ -14,7 +15,7 @@ const MyPlanCard = ({ item }) => {
   const plans = datedPlansArr.map((item, index) => `${index + 1}일차: ${item.places.join(', ')}`);
 
   return (
-    <Link to={`/detailPlan/${id}`}>
+    <Link to={`${DETAILPLAN}/${id}`}>
       <CardContainer>
         <div className="h-48 bg-gray-100 flex justify-center items-center">지도 이미지가 들어갈</div>
         <ContentsContainer>
