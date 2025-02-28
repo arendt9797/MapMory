@@ -21,7 +21,7 @@ const MyPlanCard = ({ item }) => {
 
   return (
     <Link to={`/detailPlan/${id}`}>
-      <div className=" rounded-3xl overflow-hidden bg-white border-2 w-72 hover:shadow-lg transition-shadow duration-300">
+      <div className="w-full max-w-xs mx-auto rounded-3xl overflow-hidden bg-white border-2 hover:shadow-lg transition-shadow duration-300">
         {/* 지도 이미지 플레이스홀더 */}
         <div className="h-48 bg-gray-100 flex justify-center items-center">지도 이미지가 들어갈</div>
         {/*contents box*/}

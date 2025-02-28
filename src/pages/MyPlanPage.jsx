@@ -4,9 +4,7 @@ import MyPlanCard from '../components/features/MyPlanCard';
 
 const MyPlanPage = () => {
   const getMyPosts = async () => {
-    const { data } = await supabase
-      .from('plans')
-      .select(`* , detail_plans(place, plan_date, plan_memo, plan_time, map)`);
+    const { data } = await supabase.from('plans').select(`* , detail_plans(place, plan_date, plan_time, map)`);
     return data;
   };
 
@@ -25,12 +23,11 @@ const MyPlanPage = () => {
   if (isTestPending) {
     return <div>로딩</div>;
   }
-  console.log('testData', testData);
 
   return (
-    <div className="p-10">
-      <h1 className="font-bold text-3xl text-center">수임이가 계획한 여행 일정 리스트</h1>
-      <div className="grid gap-10 m-12 grid-cols-3 justify-evenly">
+    <div className="p-10 flex flex-col justify-center items-center">
+      <h1 className="font-bold text-3xl text-center m-5">닉네임의 여행 계획 리스트</h1>
+      <div className="w-4/5 grid grid-cols-3 gap-20 p-10">
         {testData.map((item) => (
           <MyPlanCard key={item.id} item={item} />
         ))}
