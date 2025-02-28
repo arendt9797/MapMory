@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMyPlans } from '../apis/planApi';
+import { QUERY_KEYS } from '../../constants/queryKeys';
 
 const useMyPlan = (id) => {
   const {
@@ -8,7 +9,7 @@ const useMyPlan = (id) => {
     isError: isDataError
   } = useQuery({
     queryFn: () => getMyPlans(id),
-    queryKey: ['plans']
+    queryKey: [QUERY_KEYS.PLANS]
   });
 
   return { planData, isDataError, isDataPending };
