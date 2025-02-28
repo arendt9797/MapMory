@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { CREATEPLAN } from '../constants/pagePaths';
 const HomePage = () => {
   return (
     <div className="container h-full mx-auto flex flex-col items-center justify-center gap-20 min-h-[calc(100vh-60px)]">
@@ -9,7 +10,7 @@ const HomePage = () => {
       <p className="text-4xl font-semibold text-primary">
         <span className="text-primaryHover">M</span>AP<span className="text-primaryHover">M</span>ORY
       </p>
-      <Link to="/createPlan" className="bg-secondary p-2 px-4 rounded-3xl text-white  hover:bg-secondaryHover">
+      <Link to={CREATEPLAN} className="bg-secondary p-2 px-4 rounded-3xl text-white  hover:bg-secondaryHover">
         계획짜러 가기
       </Link>
     </div>
