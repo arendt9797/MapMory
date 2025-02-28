@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { CREATEPLAN, MYPLAN } from '../../constants/pagePaths';
+import { CREATEPLAN, HOME, MYPLAN } from '../../constants/pagePaths';
 import { useAuthStore } from '../../stores/authStore';
 
 export const AuthHeader = () => {
@@ -8,7 +8,7 @@ export const AuthHeader = () => {
   const handleLogout = () => {
     userSignOut();
     alert('로그아웃 되었습니다.');
-    navigate('/');
+    navigate(HOME);
   };
   return (
     <div className="flex items-center gap-4">
