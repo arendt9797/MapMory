@@ -1,73 +1,49 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { supabase } from '../lib/apis/supabaseClient';
 import DetailPlanMap from '../components/features/DetailPlanMap';
+import { getDetailPlans, getPlan } from '../lib/apis/getDetailPlans';
 
 const DetailPlanPage = () => {
-  // params에 해당하는 plan 호출
   const { id } = useParams();
   const [plan, setPlan] = useState({});
   const [detailPlans, setDetailPlans] = useState([]);
+  let day = 0;
 
-  //todo params에 해당하는 plan의 id 값을 가지고 있는 모든 detail-plans 가져오기
-
-  const getPlan = async (id) => {
-    const { data, error } = await supabase.from('plans').select('*');
-
-    if (error) {
-      console.error(error);
-      return error;
-    }
-
-    // plan id와 params로 받은 id가 일치하는 plan 필터링
-    // data.find((data) => data.id === Number(id));
-    //*현재는 uuid라서 Number없이 테스트 중
-    //todo uuid -> int
-
-    return data.find((data) => data.id === id);
-  };
-
-  const getDetailPlans = async (id) => {
-    const { data, error } = await supabase.from('detail_plans').select('*').order('plan_date').order('plan_time');
-
-    if (error) {
-      console.error(error);
-      return error;
-    }
-
-    return data.filter((data) => data.plan_id === id);
-  };
-
+  // params에 해당하는 plan 호출
   useEffect(() => {
     const fetchData = async () => {
       const planData = await getPlan(id);
       setPlan(planData);
+
       const detailPlans = await getDetailPlans(planData.id);
       setDetailPlans(detailPlans);
     };
     fetchData();
   }, [id]);
 
-  // console.log('plan', plan);
-  // console.log('detailPlans', detailPlans);
-
   return (
-    <div className="h-full w-screen bg-red">
-      <div className="text-red-600">지도</div>
-      <DetailPlanMap detailPlans={detailPlans} />
+    <div>
+      <h2>{plan.title}</h2>
+      {detailPlans.length > 0 ? <DetailPlanMap detailPlans={detailPlans} /> : `지도 정보를 불러오고 있습니다.`}
       <div>
-        <h3>클릭한 장소 이름 </h3>
         <div>
-          <h4>내가 찜한 장소</h4>
           <ul>
-            {detailPlans.map((plan) => {
+            {detailPlans.map((plan, index, arr) => {
+              const checkDay = () => {
+                if (index === 0 || arr[index - 1].plan_date !== arr[index].plan_date) {
+                  return true;
+                }
+                return false;
+              };
+
               return (
                 <li key={plan.id}>
-                  <p>{plan.place}</p>
-                  <p>{plan.date}</p>
+                  {checkDay() && <p>{(day += 1)}일차</p>}
+                  <p>{`제목: ${plan.plan_memo}`}</p>
+                  <p>{plan.plan_date}</p>
                   <p>{plan.plan_time}</p>
-                  <p>{plan.plan_memo}</p>
+                  <p>{plan.place}</p>
                 </li>
               );
             })}

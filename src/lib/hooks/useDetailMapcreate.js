@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
+import { useDetailMapCreateFile } from '../../constants/detailPlanPage';
 
-export const ZOOM = 14;
-const useDetailMapcreate = (mapRef, lat, lng) => {
+const useDetailMapcreate = (mapRef, point) => {
   useEffect(() => {
     mapRef.current = new window.naver.maps.Map(mapRef.current, {
-      center: new window.naver.maps.LatLng(lat, lng),
-      zoom: ZOOM
+      center: new window.naver.maps.LatLng(point._lat, point._lng),
+      zoom: useDetailMapCreateFile.ZOOM
     });
-  }, [mapRef, lat, lng]);
+  }, [mapRef, point._lat, point._lng]);
 };
 
 export default useDetailMapcreate;
