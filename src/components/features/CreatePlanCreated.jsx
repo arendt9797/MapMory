@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { supabase } from '../../lib/apis/supabaseClient';
-import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { HOME } from '../../constants/pagePaths';
 
 const CreatePlanCreated = ({ detailPlans, setDetailPlans }) => {
   const [planTitle, setPlanTitle] = useState('');
+
+  const navigate = useNavigate();
+
   const [userId, setUserId] = useState(null);
   // useEffect(() => {
   //   const fetchUserId = async () => {
@@ -32,7 +36,7 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans }) => {
       return;
     }
 
-    const tempId = 'efa4e90c-c19b-407e-a3ba-42fdaabf7a48'
+    const tempId = 'efa4e90c-c19b-407e-a3ba-42fdaabf7a48';
     // 'plans'테이블에 계획 추가
     const { data: planData, error: plansError } = await supabase
       .from('plans')
@@ -40,7 +44,8 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans }) => {
         user_id: tempId,
         title: planTitle
       })
-      .select().single()
+      .select()
+      .single();
 
     if (plansError) {
       console.error('계획 저장 실패:', plansError.message);
@@ -63,34 +68,58 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans }) => {
         console.error('❌ 일정 저장 실패:', detailPlanError.message);
         return;
       }
-    })
+    });
     alert('저장 완료!');
     setDetailPlans([]); // 저장 후 일정 목록 초기화
-    setPlanTitle(''); // 계획 이름 초기화
+    setPlanTitle(H); // 계획 이름 초기화
   };
 
+  const handleCancel = () => {
+    setDetailPlans([]); // 저장 후 일정 목록 초기화
+    setPlanTitle(''); // 계획 이름 초기화
+    navigate(HOME)
+  }
+
   return (
-    <div className="absolute bottom-5 right-5 w-96 h-96 bg-white border-4 border-secondary p-2 rounded-md">
+    <div>
       <form onSubmit={handleSavePlan}>
-        <h3>계획 이름</h3>
-        <input
-          type="text"
-          placeholder="계획의 이름은?"
-          value={planTitle}
-          onChange={(e) => setPlanTitle(e.target.value)}
-        />
-        <button type="submit" className="bg-primary">
-          계획 저장하기!
-        </button>
-      </form>
-      <div className="flex items-center gap-4">
-        <div className="bg-white border-2 border-black p-2 rounded-full text-sm w-8 h-8 flex items-center justify-center">
-          1
+        <div className="grid border-2 border-primary rounded-md">
+          <div className="border-b-2 border-primary p-5 flex items-center justify-center">
+            <h1 className="text-lg text-secondary mr-2 font-bold">계획 이름 : </h1>
+            <input
+              type="text"
+              placeholder="계획 이름을 적어주세요!"
+              value={planTitle}
+              onChange={(e) => setPlanTitle(e.target.value)}
+              className="outline-none border-b-primary border-b-2 w-2/3 text-lg"
+            />
+          </div>
+          <ul className="p-6 space-y-4 overflow-y-auto h-96 scrollbar scrollbar-thumb-primary scrollbar-track-transparent">
+            {detailPlans.map((detailPlan, i) => (
+              <li key={i} className="flex items-center gap-4">
+                <div className="bg-white border-2 border-black p-2 rounded-full text-sm w-8 h-8 flex items-center justify-center">
+                  {i + 1}
+                </div>
+                <div>
+                  <span className="text-lg font-bold text-secondary">{detailPlan.planMemo}</span>
+                  <div className="text-sm text-secondaryHover">
+                    <span className="mr-4">날짜 : {detailPlan.planDate}</span>
+                    <span>시간 : {detailPlan.planTime}</span>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-        <span>선택한 장소</span>
-        <span>선택한 날짜</span>
-        <span>선택한 시간</span>
-      </div>
+        <div>
+          <button type="button" className="bg-primary" onClick={handleCancel}>
+            취소
+          </button>
+          <button type="submit" className="bg-secondary text-white">
+            계획 저장하기!
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

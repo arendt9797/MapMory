@@ -19,11 +19,12 @@ const CreatePlanPage = () => {
   return (
     <>
       <NaverMap />
-      <div className="z-10">
+      <div className="w-2/5 bg-white shadow-2xl grid grid-rows-[1fr_4fr] absolute top-0 right-0 p-6 space-y-4 h-full">
         <CreatePlanCreation
           setConfirmedMarkers={setConfirmedMarkers}
           tempMarker={beforeConfirmedMarker}
           setTempMarker={setBeforeConfirmedMarker}
+          detailPlans={detailPlans}
           setDetailPlans={setDetailPlans}
         />
         <CreatePlanCreated detailPlans={detailPlans} setDetailPlans={setDetailPlans} />
