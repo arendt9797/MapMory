@@ -71,7 +71,7 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans }) => {
     });
     alert('저장 완료!');
     setDetailPlans([]); // 저장 후 일정 목록 초기화
-    setPlanTitle(H); // 계획 이름 초기화
+    setPlanTitle(''); // 계획 이름 초기화
   };
 
   const handleCancel = () => {
@@ -97,7 +97,7 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans }) => {
           <ul className="p-6 space-y-4 overflow-y-auto h-96 scrollbar scrollbar-thumb-primary scrollbar-track-transparent">
             {detailPlans.map((detailPlan, i) => (
               <li key={i} className="flex items-center gap-4">
-                <div className="bg-white border-2 border-black p-2 rounded-full text-sm w-8 h-8 flex items-center justify-center">
+                <div className="bg-white border-2 border-secondary p-2 rounded-full text-sm font-bold text-secondary w-8 h-8 flex items-center justify-center">
                   {i + 1}
                 </div>
                 <div>
