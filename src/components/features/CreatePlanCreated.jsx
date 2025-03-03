@@ -3,7 +3,7 @@ import { supabase } from '../../lib/apis/supabaseClient';
 import { useNavigate } from 'react-router-dom';
 import { HOME } from '../../constants/pagePaths';
 
-const CreatePlanCreated = ({ detailPlans, setDetailPlans }) => {
+const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }) => {
   const [planTitle, setPlanTitle] = useState('');
 
   const navigate = useNavigate();
@@ -77,8 +77,8 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans }) => {
   const handleCancel = () => {
     setDetailPlans([]); // 저장 후 일정 목록 초기화
     setPlanTitle(''); // 계획 이름 초기화
-    navigate(HOME)
-  }
+    navigate(HOME);
+  };
 
   return (
     <div>
@@ -107,6 +107,7 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans }) => {
                     <span>시간 : {detailPlan.planTime}</span>
                   </div>
                 </div>
+                <button type='button' onClick={() => onHandleDeleteMarker(i)} className='bg-red-500'>&times;</button>
               </li>
             ))}
           </ul>

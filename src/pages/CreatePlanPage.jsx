@@ -15,7 +15,18 @@ const CreatePlanPage = () => {
   useNaverMap(mapRef);
   useMapClickListner(mapRef, setBeforeConfirmedMarker);
   useOrderedMarkers(mapRef, confirmedMarkers, beforeConfirmedMarker);
-  
+
+  const useHandleDeleteMarker = (markerIndex) => {
+    setConfirmedMarkers(
+      (prev) =>
+        prev
+          .filter((_, index) => index !== markerIndex) // 해당 마커 삭제
+          .map((marker, newIndex) => ({ ...marker, number: newIndex + 1 })) // 번호 재정렬
+    );
+    setDetailPlans((prev) => prev.filter((_, index) => index !== markerIndex));
+    useOrderedMarkers(mapRef, confirmedMarkers, beforeConfirmedMarker) // 일정도 같이 삭제
+  };
+
   return (
     <>
       <NaverMap />
@@ -27,7 +38,11 @@ const CreatePlanPage = () => {
           detailPlans={detailPlans}
           setDetailPlans={setDetailPlans}
         />
-        <CreatePlanCreated detailPlans={detailPlans} setDetailPlans={setDetailPlans} />
+        <CreatePlanCreated
+          detailPlans={detailPlans}
+          setDetailPlans={setDetailPlans}
+          onHandleDeleteMarker={useHandleDeleteMarker}
+        />
       </div>
     </>
   );
