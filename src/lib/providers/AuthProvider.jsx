@@ -22,7 +22,7 @@ const AuthProvider = () => {
         }
       }
 
-      // 2️⃣ onAuthStateChange로 로그인/로그아웃 감지
+      // onAuthStateChange로 로그인/로그아웃 감지
       const { data: authListener } = supabase.auth.onAuthStateChange(async (_, session) => {
         if (session?.user) {
           const { data, error } = await supabase.from('users').select('nickname').eq('id', session.user.id).single();
