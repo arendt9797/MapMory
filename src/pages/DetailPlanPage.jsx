@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import DetailPlanMap from '../components/features/DetailPlanMap';
-import { getDetailPlans, getPlan } from '../lib/apis/getDetailPlans';
+import StatusPage from '../components/features/myPlanPage/StatusPage';
+import { useEffect } from 'react';
+import { useDetailPlan } from '../lib/hooks/useDetailPlan';
 
 const DetailPlanPage = () => {
   const { id } = useParams();
@@ -11,16 +12,25 @@ const DetailPlanPage = () => {
   let day = 0;
 
   // params에 해당하는 plan 호출
-  useEffect(() => {
-    const fetchData = async () => {
-      const planData = await getPlan(id);
-      setPlan(planData);
+  const { planData, isDataError, isDataPending } = useDetailPlan(id);
 
-      const detailPlans = await getDetailPlans(planData.id);
-      setDetailPlans(detailPlans);
-    };
-    fetchData();
-  }, [id]);
+  useEffect(() => {
+    if (planData) {
+      setPlan(planData);
+      const sortByDate = [...planData.detail_plans].sort((a, b) => a.plan_date.localeCompare(b.plan_date));
+      const sortByTime = [...sortByDate].sort((a, b) => a.plan_time.localeCompare(b.plan_time));
+
+      setDetailPlans(sortByTime);
+    }
+  }, [planData]);
+
+  if (isDataError) {
+    return <StatusPage>오류가 발생했습니다.</StatusPage>;
+  }
+
+  if (isDataPending) {
+    return <StatusPage>로딩중입니다.</StatusPage>;
+  }
 
   return (
     <div>
@@ -31,10 +41,7 @@ const DetailPlanPage = () => {
           <ul>
             {detailPlans.map((plan, index, arr) => {
               const checkDay = () => {
-                if (index === 0 || arr[index - 1].plan_date !== arr[index].plan_date) {
-                  return true;
-                }
-                return false;
+                return index === 0 || arr[index - 1].plan_date !== arr[index].plan_date;
               };
 
               return (

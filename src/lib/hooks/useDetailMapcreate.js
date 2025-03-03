@@ -1,13 +1,28 @@
-import { useEffect } from 'react';
-import { mapCreateFile } from '../../constants/detailPlanPage';
+import { useEffect, useState } from 'react';
+import { mapCreateFile, planMapFile } from '../../constants/detailPlanPage';
 
-const useDetailMapcreate = (mapRef, point) => {
+// 생성된 맵의 중심을 계획의 첫 위치로 설정
+export const useNaverMapInitializer = ({ mapRef, firstPlan }) => {
   useEffect(() => {
     mapRef.current = new window.naver.maps.Map(mapRef.current, {
-      center: new window.naver.maps.LatLng(point._lat, point._lng),
+      center: new window.naver.maps.LatLng(firstPlan.map_point._lat, firstPlan.map_point._lng),
       zoom: mapCreateFile.ZOOM
     });
-  }, [mapRef, point._lat, point._lng]);
+  }, [mapRef, firstPlan]);
 };
 
-export default useDetailMapcreate;
+/**
+ * @returns {naver.maps.Map}
+ * 맵 객체 생성
+ */
+export const useNaverMapObject = () => {
+  const [mapObject, setMapObject] = useState(null);
+
+  useEffect(() => {
+    if (!mapObject) {
+      setMapObject(new window.naver.maps.Map(planMapFile.MAPID));
+    }
+  }, [mapObject]);
+
+  return mapObject;
+};

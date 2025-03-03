@@ -1,15 +1,22 @@
 import { useRef } from 'react';
-import useDetailMapcreate from '../../lib/hooks/useDetailMapcreate';
-import convertToMapPoint from '../../lib/utils/convertToMapPoint';
-import rendereDetailPolyline from '../../lib/utils/renderDetailPolyline';
+import { useNaverMapInitializer, useNaverMapObject } from '../../lib/hooks/useDetailMapcreate';
+import renderDetailPolylineAndMarker from '../../lib/utils/renderDetailPolylineAndMarker';
 import { planMapFile } from '../../constants/detailPlanPage';
 
 const DetailPlanMap = ({ detailPlans }) => {
-  const mapRef = useRef(null); // map을 통해 렌더링 될 Element
+  const map = useNaverMapObject(); // 생성된 map mapRef에 전달
+  const mapRef = useRef(map); // map을 통해 렌더링 될 Element
 
-  useDetailMapcreate(mapRef, detailPlans[0].map_point);
-  const mapPoints = convertToMapPoint(detailPlans);
-  rendereDetailPolyline(mapRef, mapPoints);
+  // 맵 초기 설정
+  useNaverMapInitializer({ mapRef, firstPlan: detailPlans[0] });
+
+  // 맵 생성 후 polyline과 마커 생성
+  if (mapRef.current) {
+    renderDetailPolylineAndMarker(
+      mapRef,
+      detailPlans.map((detailPlan) => detailPlan.map_point)
+    );
+  }
 
   return (
     <>
