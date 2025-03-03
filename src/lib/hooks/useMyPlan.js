@@ -1,18 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
-import { getMyPlans } from '../apis/planApi';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '../../constants/queryKeys';
+import { getMyPlans } from '../apis/planApi';
 
 const useMyPlan = (id) => {
-  const {
-    data: planData,
-    isPending: isDataPending,
-    isError: isDataError
-  } = useQuery({
-    queryFn: () => getMyPlans(id),
-    queryKey: [QUERY_KEYS.PLANS]
+  const response = useInfiniteQuery({
+    queryKey: [QUERY_KEYS.PLANS],
+    queryFn: ({ pageParam = 1 }) => getMyPlans(id, pageParam),
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.length > 0 ? allPages.length + 1 : undefined;
+    }
   });
-
-  return { planData, isDataError, isDataPending };
+  return response;
 };
 
 export default useMyPlan;
