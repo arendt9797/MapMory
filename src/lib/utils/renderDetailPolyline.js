@@ -1,18 +1,18 @@
-import { useDetailPolylineFile } from '../../constants/detailPlanPage';
+import { markerFile, polylineFile } from '../../constants/detailPlanPage';
 
 /**
  *
  * @param {*} mapRef
  * @param {{lng: number; lat: number;}[]} mapPoints
  */
-const useDetailPolyline = (mapRef, mapPoints) => {
+const rendereDetailPolyline = (mapRef, mapPoints) => {
   const { naver } = window;
 
   const polyline = new naver.maps.Polyline({
     map: mapRef.current,
     path: [],
-    strokeColor: useDetailPolylineFile.POLYLINECOLOR,
-    strokeWeight: useDetailPolylineFile.STROKEWEIGHT
+    strokeColor: polylineFile.POLYLINECOLOR,
+    strokeWeight: polylineFile.STROKEWEIGHT
   });
 
   mapPoints.map((point, index) => {
@@ -35,14 +35,14 @@ const useDetailPolyline = (mapRef, mapPoints) => {
                     justify-content: center;
                     align-items: center;
                   ">${index + 1}</div>`,
-        anchor: new naver.maps.Point(useDetailPolylineFile.ANCHORPOINT, useDetailPolylineFile.ANCHORPOINT)
+        anchor: new naver.maps.Point(markerFile.ANCHORPOINT, markerFile.ANCHORPOINT)
       }
     });
 
     // 마커를 클릭하면 지도의 중심에 띄워줌
-    naver.maps.Event.addListener(marker, useDetailPolylineFile.CLICK, (e) => {
+    naver.maps.Event.addListener(marker, markerFile.CLICK, (e) => {
       const markerPoint = e.coord;
-      mapRef.current.zoomBy(useDetailPolylineFile.ZOOM, markerPoint, true);
+      mapRef.current.zoomBy(markerFile.ZOOM, markerPoint, true);
       mapRef.current.setCenter(markerPoint);
     });
 
@@ -50,4 +50,4 @@ const useDetailPolyline = (mapRef, mapPoints) => {
   });
 };
 
-export default useDetailPolyline;
+export default rendereDetailPolyline;

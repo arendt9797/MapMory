@@ -5,18 +5,21 @@ export const supabaseItems = {
   PLANTIME: 'plan_time'
 };
 
-export const useDetailMapCreateFile = {
+export const mapCreateFile = {
   ZOOM: 14
 };
 
-export const useDetailPolylineFile = {
+export const polylineFile = {
   POLYLINECOLOR: '#5347AA',
   STROKEWEIGHT: 2,
-  CLICK: 'click',
-  ANCHORPOINT: 15,
-  ZOOM: 3
 };
 
-export const detailPlanMapFile = {
+export const planMapFile = {
   MAPID: 'map'
+};
+
+export const markerFile = {
+  ANCHORPOINT: 15,
+  ZOOM: 3,
+  CLICK: 'click',
 };
