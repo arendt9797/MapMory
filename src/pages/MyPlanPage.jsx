@@ -2,6 +2,7 @@ import Title from '../components/commons/Title';
 import GridBox from '../components/features/myPlanPage/GridBox';
 import MyPlanCard from '../components/features/myPlanPage/MyPlanCard';
 import StatusPage from '../components/features/myPlanPage/StatusPage';
+import Button from '../components/commons/Button';
 import { AUTH_STORAGE } from '../constants/storageKey';
 import useMyPlan from '../lib/hooks/useMyPlan';
 
@@ -19,15 +20,15 @@ const MyPlanPage = () => {
   }
   return (
     <main className="p-10 flex flex-col justify-center items-center m-">
-      <Title fontSize={'3xl'} margin={'md'}>
-        {nickname}의 여행 계획 리스트
-      </Title>
+      <Title size={'3xl'}>{nickname}의 여행 계획 리스트</Title>
       <GridBox>
         {planData.map((item) => (
           <MyPlanCard key={item.id} item={item} />
         ))}
       </GridBox>
-      {/* <button className="bg-primary p-2 px-4 rounded-3xl text-white hover:bg-primaryHover">더보기 +</button> */}
+      <Button theme="primary" size="md">
+        더보기 +
+      </Button>
     </main>
   );
 };

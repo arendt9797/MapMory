@@ -1,5 +1,5 @@
 import { AUTH_STORAGE } from '../../../constants/storageKey';
-import Title from '../components/commons/Title';
+import Title from '../../commons/Title';
 
 const StatusPage = ({ children }) => {
   const nickname = JSON.parse(localStorage.getItem(AUTH_STORAGE)).state.userInfo.nickname;

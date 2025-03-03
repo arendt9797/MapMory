@@ -19,10 +19,10 @@ const MyPlanCard = ({ item }) => {
       <CardContainer>
         <div className="h-48 bg-gray-100 flex justify-center items-center">지도 이미지가 들어갈</div>
         <ContentsContainer>
-          <Text fontSize={'xs'} textColor={'secondary'}>{`${startDate} ~ ${endDate}의 일정`}</Text>
-          <Title fontSize={'xl'}>{title}</Title>
+          <Text size="sm" theme="secondary">{`${startDate} ~ ${endDate}의 일정`}</Text>
+          <Title size={'xl'}>{title}</Title>
           <div className="text-gray-500 mt-2 overflow-hidden line-clamp-3 whitespace-pre-line">
-            <Text fontSize={'sm'}>{plans.map((plan) => plan + '\n')}</Text>
+            <Text size={'md'}>{plans.map((plan) => plan + '\n')}</Text>
           </div>
         </ContentsContainer>
       </CardContainer>
