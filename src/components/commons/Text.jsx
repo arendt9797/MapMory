@@ -2,9 +2,9 @@
  * Text 컴포넌트입니다. 기본 p 태그로 설정
  * @component
  * @example
- * <p theme='secondary' size='md' className='m-5'>
+ * <Text theme='secondary' size='md' className='m-5'>
  *   내용입니다.
- * </p>
+ * </Text>
  *
  * @prop {string} [theme] - 기본 테마, 프로젝트 primary 색상 or secondary 색상 선택
  * @prop {string} [size] - 텍스트 크기 ( "xs" | "sm" | "md" | "lg" | "xl" | "2xl" )
@@ -13,7 +13,7 @@
 const Text = ({ children, theme, size, className = '', ...props }) => {
   const themeStyles = {
     primary: 'text-primary',
-    secondary: 'text-bg-secondary'
+    secondary: 'text-secondary'
   };
 
   const sizeStyles = {
