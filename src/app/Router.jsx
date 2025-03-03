@@ -7,6 +7,7 @@ import SignInPage from '../pages/SignInPage';
 import SignUpPage from '../pages/SignUpPage';
 import Layout from '../components/layouts/Layout';
 import { CREATEPLAN, DETAILPLAN, MYPLAN, SIGNIN, SIGNUP } from '../constants/pagePaths';
+import ProtectedRouter from './ProtectedRouter';
 
 const router = createBrowserRouter([
   {
@@ -14,13 +15,19 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: CREATEPLAN, element: <CreatePlanPage /> },
-      { path: `${DETAILPLAN}/:id`, element: <DetailPlanPage /> },
-      { path: MYPLAN, element: <MyPlanPage /> },
-      { path: SIGNUP, element: <SignUpPage /> },
-      { path: SIGNIN, element: <SignInPage /> }
+      {
+        path: '',
+        element: <ProtectedRouter />,
+        children: [
+          { path: CREATEPLAN, element: <CreatePlanPage /> },
+          { path: `${DETAILPLAN}/:id`, element: <DetailPlanPage /> },
+          { path: MYPLAN, element: <MyPlanPage /> }
+        ]
+      }
     ]
-  }
+  },
+  { path: SIGNUP, element: <SignUpPage /> },
+  { path: SIGNIN, element: <SignInPage /> }
 ]);
 
 const Router = () => {

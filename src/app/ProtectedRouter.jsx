@@ -7,7 +7,6 @@ const ProtectedRouter = () => {
   if (!isLogin) {
     return <Navigate to="/signIn" replace state={{ redirectionFrom: pathname }} />;
   }
-
   return <Outlet />;
 };
 
