@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/apis/supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import { HOME } from '../../constants/pagePaths';
+import { HOME, MYPLAN } from '../../constants/pagePaths';
 
 const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }) => {
   const [planTitle, setPlanTitle] = useState('');
@@ -11,19 +11,16 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }
   const [userId, setUserId] = useState(null);
   useEffect(() => {
     const fetchUserId = async () => {
-      const { data: sessionData, error } = await supabase.auth.getSession();
-      if (error || !sessionData.session) {
-        console.error('❌ 유저 정보를 가져오는 중 오류 발생:', error);
+      const { data: userData, error } = await supabase.auth.getUser();
+      if (error) {
+        alert('유저 정보를 가져오는 중 오류 발생: ', error);
         return;
       }
-      setUserId(sessionData.session.user.id);
-      console.log('✅ 가져온 userId:', sessionData.session.user.id);
+      setUserId(userData.user.id);
     };
 
     fetchUserId();
   }, []);
-
-  console.log('userId =====>', userId);
 
   const handleSavePlan = async (e) => {
     e.preventDefault();
@@ -36,7 +33,6 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }
       return;
     }
 
-    // const tempId = 'efa4e90c-c19b-407e-a3ba-42fdaabf7a48';
     // 'plans'테이블에 계획 추가
     const { data: planData, error: plansError } = await supabase
       .from('plans')
@@ -72,6 +68,7 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }
     alert('저장 완료!');
     setDetailPlans([]); // 저장 후 일정 목록 초기화
     setPlanTitle(''); // 계획 이름 초기화
+    navigate(MYPLAN)
   };
 
   const handleCancel = () => {
