@@ -24,7 +24,7 @@ const CreatePlanPage = () => {
   return (
     <>
       <NaverMap />
-      <div className="w-1/3 bg-white shadow-2xl grid grid-rows-[1fr_4fr] absolute top-0 right-0 p-6 space-y-4 h-full">
+      <div className="w-5/12 bg-white shadow-2xl grid grid-rows-[2fr_5fr] absolute top-0 right-0 p-6 space-y-4 h-full">
         <CreatePlanCreation
           setConfirmedMarkers={setConfirmedMarkers}
           tempMarker={beforeConfirmedMarker}
