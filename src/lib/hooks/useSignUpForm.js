@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { supabase } from '../apis/supabaseClient';
 import { useNavigate } from 'react-router-dom';
 import { authValidate } from '../utils/authValidate';
+import { EMAIL, NICKNAME } from '../../constants/formFields';
 
 const useSignUpForm = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const useSignUpForm = () => {
     setErrorMessage((prev) => ({ ...prev, [name]: errorMsg }));
 
     // 이메일, 닉네임 변경 시 중복 체크 다시
-    if (name === 'email' || name === 'nickname') {
+    if (name === EMAIL || name === NICKNAME) {
       setIsDuplicateChecked((prev) => ({ ...prev, [name]: false }));
     }
   };
@@ -46,12 +47,12 @@ const useSignUpForm = () => {
     if (data.length > 0) {
       return setErrorMessage((prev) => ({
         ...prev,
-        [type]: `이미 사용 중인 ${type === 'email' ? '이메일' : '닉네임'}입니다.`
+        [type]: `이미 사용 중인 ${type === EMAIL ? '이메일' : '닉네임'}입니다.`
       }));
     }
 
     setIsDuplicateChecked((prev) => ({ ...prev, [type]: true }));
-    setErrorMessage((prev) => ({ ...prev, [type]: `사용 가능한 ${type === 'email' ? '이메일' : '닉네임'}입니다.` }));
+    setErrorMessage((prev) => ({ ...prev, [type]: `사용 가능한 ${type === EMAIL ? '이메일' : '닉네임'}입니다.` }));
   };
 
   function isValidForm() {

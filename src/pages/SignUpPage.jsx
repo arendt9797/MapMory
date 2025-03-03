@@ -1,12 +1,13 @@
 import useSignUpForm from '../lib/hooks/useSignUpForm';
 import AuthForm from '../components/features/auth/AuthForm';
+import { EMAIL, NICKNAME, PASSWORD } from '../constants/formFields';
 const SignUpPage = () => {
   const { signUpFormData, errorMessage, checkDuplicate, handleSignUpChange, handleSignUpSubmit } = useSignUpForm();
   const signUpFormList = [
     {
       labelName: '이메일',
-      name: 'email',
-      type: 'email',
+      name: EMAIL,
+      type: EMAIL,
       placeholder: '이메일을 입력해주세요',
       value: signUpFormData.email,
       onChange: handleSignUpChange,
@@ -14,7 +15,7 @@ const SignUpPage = () => {
       button: (
         <button
           type="button"
-          onClick={() => checkDuplicate('email')}
+          onClick={() => checkDuplicate(EMAIL)}
           className="px-3 py-2 text-sm bg-gray-300 hover:bg-gray-400 rounded-md"
         >
           중복 확인
@@ -23,8 +24,8 @@ const SignUpPage = () => {
     },
     {
       labelName: '비밀번호',
-      name: 'password',
-      type: 'password',
+      name: PASSWORD,
+      type: PASSWORD,
       placeholder: '비밀번호를 입력해주세요',
       value: signUpFormData.password,
       onChange: handleSignUpChange,
@@ -33,7 +34,7 @@ const SignUpPage = () => {
     {
       labelName: '비밀번호 확인',
       name: 'confirmPassword',
-      type: 'password',
+      type: PASSWORD,
       placeholder: '비밀번호를 다시 입력해주세요',
       value: signUpFormData.confirmPassword,
       onChange: handleSignUpChange,
@@ -41,7 +42,7 @@ const SignUpPage = () => {
     },
     {
       labelName: '닉네임',
-      name: 'nickname',
+      name: NICKNAME,
       type: 'text',
       placeholder: '닉네임을 입력해주세요',
       value: signUpFormData.nickname,
@@ -50,7 +51,7 @@ const SignUpPage = () => {
       button: (
         <button
           type="button"
-          onClick={() => checkDuplicate('nickname')}
+          onClick={() => checkDuplicate(NICKNAME)}
           className="px-3 py-2 text-sm bg-gray-300 hover:bg-gray-400 rounded-md"
         >
           중복 확인
