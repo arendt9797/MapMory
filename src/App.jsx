@@ -1,5 +1,5 @@
 import Router from './app/Router';
-import AuthProvider from './stores/AuthProvider.jsx';
+import AuthProvider from './lib/providers/AuthProvider';
 
 const App = () => {
   return (
