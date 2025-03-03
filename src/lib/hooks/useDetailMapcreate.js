@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { mapCreateFile, planMapFile } from '../../constants/detailPlanPage';
+import { mapCreateFile, planMapFile } from '../../constants/naverMap';
 
 // 생성된 맵의 중심을 계획의 첫 위치로 설정
 export const useNaverMapInitializer = ({ mapRef, firstPlan }) => {

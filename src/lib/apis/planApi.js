@@ -1,4 +1,4 @@
-import { supabaseItems } from '../../constants/detailPlanPage';
+import { supabaseItems } from '../../constants/supabaseConstants';
 import { supabase } from './supabaseClient';
 
 export const getMyPlans = async (id) => {
