@@ -2,7 +2,8 @@ export const supabaseItems = {
   PLANS: 'plans',
   DETAILPLANS: 'detail_plans',
   PLANDATE: 'plan_date',
-  PLANTIME: 'plan_time'
+  PLANTIME: 'plan_time',
+  ID: 'id'
 };
 
 export const mapCreateFile = {
@@ -11,7 +12,7 @@ export const mapCreateFile = {
 
 export const polylineFile = {
   POLYLINECOLOR: '#5347AA',
-  STROKEWEIGHT: 2,
+  STROKEWEIGHT: 2
 };
 
 export const planMapFile = {
@@ -21,5 +22,5 @@ export const planMapFile = {
 export const markerFile = {
   ANCHORPOINT: 15,
   ZOOM: 3,
-  CLICK: 'click',
+  CLICK: 'click'
 };
