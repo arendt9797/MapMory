@@ -1,20 +1,65 @@
 import useSignUpForm from '../lib/hooks/useSignUpForm';
-
+import AuthForm from '../components/features/auth/AuthForm';
+import { EMAIL, NICKNAME, PASSWORD } from '../constants/formFields';
 const SignUpPage = () => {
-  const { handleSignUpChange, handleSignUpSubmit } = useSignUpForm();
-  return (
-    <div>
-      <form onSubmit={handleSignUpSubmit}>
-        <label>이메일</label>
-        <input name="email" type="email" onChange={handleSignUpChange} required />
-        <label>비밀번호</label>
-        <input name="password" type="password" onChange={handleSignUpChange} required />
-        <label>닉네임</label>
-        <input name="nickname" type="text" onChange={handleSignUpChange} required />
-        <button type="submit">회원가입</button>
-      </form>
-    </div>
-  );
+  const { signUpFormData, errorMessage, checkDuplicate, handleSignUpChange, handleSignUpSubmit } = useSignUpForm();
+  const signUpFormList = [
+    {
+      labelName: '이메일',
+      name: EMAIL,
+      type: EMAIL,
+      placeholder: '이메일을 입력해주세요',
+      value: signUpFormData.email,
+      onChange: handleSignUpChange,
+      errorMessage: errorMessage.email,
+      button: (
+        <button
+          type="button"
+          onClick={() => checkDuplicate(EMAIL)}
+          className="px-3 py-2 text-sm bg-gray-300 hover:bg-gray-400 rounded-md"
+        >
+          중복 확인
+        </button>
+      )
+    },
+    {
+      labelName: '비밀번호',
+      name: PASSWORD,
+      type: PASSWORD,
+      placeholder: '비밀번호를 입력해주세요',
+      value: signUpFormData.password,
+      onChange: handleSignUpChange,
+      errorMessage: errorMessage.password
+    },
+    {
+      labelName: '비밀번호 확인',
+      name: 'confirmPassword',
+      type: PASSWORD,
+      placeholder: '비밀번호를 다시 입력해주세요',
+      value: signUpFormData.confirmPassword,
+      onChange: handleSignUpChange,
+      errorMessage: errorMessage.confirmPassword
+    },
+    {
+      labelName: '닉네임',
+      name: NICKNAME,
+      type: 'text',
+      placeholder: '닉네임을 입력해주세요',
+      value: signUpFormData.nickname,
+      onChange: handleSignUpChange,
+      errorMessage: errorMessage.nickname,
+      button: (
+        <button
+          type="button"
+          onClick={() => checkDuplicate(NICKNAME)}
+          className="px-3 py-2 text-sm bg-gray-300 hover:bg-gray-400 rounded-md"
+        >
+          중복 확인
+        </button>
+      )
+    }
+  ];
+  return <AuthForm authFormList={signUpFormList} onSubmit={handleSignUpSubmit} buttonName="회원가입" />;
 };
 
 export default SignUpPage;
