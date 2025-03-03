@@ -8,6 +8,7 @@ import SignUpPage from '../pages/SignUpPage';
 import Layout from '../components/layouts/Layout';
 import { CREATEPLAN, DETAILPLAN, HOME, MYPLAN, SIGNIN, SIGNUP } from '../constants/pagePaths';
 import ProtectedRouter from './ProtectedRouter';
+import TestPage from '../pages/TestPage';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,8 @@ const router = createBrowserRouter([
     ]
   },
   { path: SIGNUP, element: <SignUpPage /> },
-  { path: SIGNIN, element: <SignInPage /> }
+  { path: SIGNIN, element: <SignInPage /> },
+  { path: 'test', element: <TestPage /> }
 ]);
 
 const Router = () => {
