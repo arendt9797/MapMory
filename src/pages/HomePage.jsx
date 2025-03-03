@@ -1,37 +1,66 @@
 // import { Link } from 'react-router-dom';
 
+import { useState } from 'react';
 import { useEffect, useRef } from 'react';
 
 // import { CREATEPLAN } from '../constants/pagePaths';
 const HomePage = () => {
   const mapRef = useRef(null);
+  //기본 위치값(사용자위치 못가져왔을때 서울로)
+  const [location, setLocation] = useState({ lat: 37.5666103, lng: 126.9783882 });
+  const [address, setAddress] = useState({}); // 주소를 저장할 상태 변수 추가
 
   useEffect(() => {
-    if (window.naver && mapRef.current) {
-      new window.naver.maps.Map(mapRef.current, {
-        center: new window.naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 10
+    //내위치
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
       });
+    } else {
+      setLocation();
     }
   }, []);
 
-  // var map = new naver.maps.Map('map', mapOptions);
+  useEffect(() => {
+    // 지도 표시
+    if (window.naver && mapRef.current) {
+      const naverMap = new window.naver.maps.Map(mapRef.current, {
+        center: new window.naver.maps.LatLng(location.lat, location.lng),
+        zoom: 10
+      });
+      //마커 표시
+      new window.naver.maps.Marker({
+        position: new window.naver.maps.LatLng(location.lat, location.lng),
+        map: naverMap
+      });
+      //클릭이벤트
+      window.naver.maps.Event.addListener(naverMap, 'click', (e) => {
+        const latlng = e.latlng;
+        window.naver.maps.Service.reverseGeocode(
+          {
+            coords: latlng, // 클릭한 위치 좌표
+            orders: [window.naver.maps.Service.OrderType.ADDR]
+          },
+          function (status, response) {
+            const result = response.v2; // 검색 결과의 컨테이너
+            const address = result.address; // 검색 결과로 만든 주소
+            setAddress(address);
+            console.log(address);
+            // do Something
+          }
+        );
+      });
+    }
+  }, [location]);
+
   return (
-    <div className="container h-full mx-auto flex flex-col items-center justify-center gap-20 min-h-[calc(100vh-60px)]">
-      {/* <p className="text-5xl text-primaryHover font-semibold ">
-        <span className="text-secondary">MAP</span>에 <span className="text-secondary">MEMORY</span>를 더하다!
-      </p>
-      <img src="/header-logo.png" className="w-[70px]" />
-      <p className="text-4xl font-semibold text-primary">
-        <span className="text-primaryHover">M</span>AP<span className="text-primaryHover">M</span>ORY
-      </p>
-      <Link to={CREATEPLAN} className="bg-secondary p-2 px-4 rounded-3xl text-white  hover:bg-secondaryHover">
-        계획짜러 가기
-      </Link> */}
-      지도
-      <div id="mapDiv" ref={mapRef} style={{ width: '100%', height: '500px' }}>
+    <div className="h-[calc(100vh-60px)] relative">
+      <div id="mapDiv" ref={mapRef} style={{ width: '100%', height: '100%' }}>
         지도 api
       </div>
+      {address.jibunAddress && (
+        <div className="absolute right-0 top-0 p-4 bg-white h-full">{`${address.jibunAddress}`}</div>
+      )}
     </div>
   );
 };
