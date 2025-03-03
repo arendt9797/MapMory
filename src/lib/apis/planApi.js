@@ -1,9 +1,7 @@
 import { supabase } from './supabaseClient';
 
-export const getMyPlans = async (id, pageParam) => {
-  const limit = 3;
+export const getMyPlans = async (id, limit, pageParam) => {
   const offset = (pageParam - 1) * limit;
-
   const { data } = await supabase
     .from('plans')
     .select(`* , detail_plans(place, plan_date, plan_time)`)

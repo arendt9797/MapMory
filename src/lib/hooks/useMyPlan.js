@@ -3,11 +3,14 @@ import { QUERY_KEYS } from '../../constants/queryKeys';
 import { getMyPlans } from '../apis/planApi';
 
 const useMyPlan = (id) => {
+  const limit = 3;
   const response = useInfiniteQuery({
     queryKey: [QUERY_KEYS.PLANS],
-    queryFn: ({ pageParam = 1 }) => getMyPlans(id, pageParam),
+    queryFn: ({ pageParam = 1 }) => getMyPlans(id, limit, pageParam),
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage.length > 0 ? allPages.length + 1 : undefined;
+      const totalPlans = allPages.flat().length;
+      const nextPage = Math.floor(totalPlans / limit) + 1;
+      return lastPage.length === limit ? nextPage : undefined;
     }
   });
   return response;
