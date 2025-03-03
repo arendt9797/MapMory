@@ -57,7 +57,7 @@ const CreatePlanCreation = ({ setConfirmedMarkers, tempMarker, setTempMarker, de
               required
             />
             <Button type="submit" theme="secondary" size="md" className="w-1/4 min-w-fit">
-              추가하기!
+              추가하기
             </Button>
           </div>
         </form>
