@@ -9,8 +9,8 @@ export const useAuthStore = create(
       userInfo: { ...initialState },
       userSignIn: (user) => set({ userInfo: { isLogin: true, nickname: user.nickname } }),
       userSignOut: async () => {
-        await supabase.auth.signOut();
         set({ userInfo: { ...initialState } });
+        await supabase.auth.signOut();
       },
       initAuthListener: () => {
         const { data: authListener } = supabase.auth.onAuthStateChange(async (_, session) => {
