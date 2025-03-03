@@ -7,11 +7,8 @@ const AuthProvider = () => {
 
   useEffect(() => {
     const initAuth = async () => {
-      console.log('🔄 AuthProvider 실행됨');
-
-      // 1️⃣ 페이지 새로고침 시 세션을 강제로 가져옴
+      // 페이지 새로고침 시 세션을 강제로 가져옴
       const { data: sessionData } = await supabase.auth.getSession();
-      console.log('🔥 초기 세션:', sessionData);
 
       if (sessionData?.session?.user) {
         const { data, error } = await supabase
@@ -27,8 +24,6 @@ const AuthProvider = () => {
 
       // 2️⃣ onAuthStateChange로 로그인/로그아웃 감지
       const { data: authListener } = supabase.auth.onAuthStateChange(async (_, session) => {
-        console.log('✅ Auth 변경 감지:', session);
-
         if (session?.user) {
           const { data, error } = await supabase.from('users').select('nickname').eq('id', session.user.id).single();
 
