@@ -1,4 +1,4 @@
-export const getMinDate = (detailPlans) => {
+export const calculateMinDate = (detailPlans) => {
   // detailPlans가 비어있다면 오늘 날짜를 min으로 설정
   if (detailPlans.length === 0) {
     return new Date().toISOString().split('T')[0];

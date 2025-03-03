@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useRoadAddress } from '../../lib/hooks/useRoadAddress';
-import { getMinDate } from '../../lib/utils/calculateMinDate';
-import { useCreatePlanCreation } from '../../lib/hooks/useCreatePlanCreation';
+import { useRoadAddress } from '../../lib/hooks/create-plan/useRoadAddress';
+import { calculateMinDate } from '../../lib/utils/calculateMinDate';
+import { useCreatePlanCreation } from '../../lib/hooks/create-plan/useCreatePlanCreation';
 
 const CreatePlanCreation = ({ setConfirmedMarkers, tempMarker, setTempMarker, detailPlans, setDetailPlans }) => {
   const [roadAddress, setRoadAddress] = useState('');
@@ -15,7 +15,7 @@ const CreatePlanCreation = ({ setConfirmedMarkers, tempMarker, setTempMarker, de
     setRoadAddress
   );
 
-  const minDate = getMinDate(detailPlans);
+  const minDate = calculateMinDate(detailPlans);
 
   return (
     <div className="flex justify-center items-center">

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { makeConfirmedIcon, makeTempIcon } from '../utils/makeMarkerIcon';
+import { makeConfirmedIcon, makeTempIcon } from '../../utils/makeMarkerIcon';
 
 export const useOrderedMarkers = (mapRef, confirmedMarkers, tempMarker) => {
   const markerRef = useRef([]);
@@ -19,7 +19,7 @@ export const useOrderedMarkers = (mapRef, confirmedMarkers, tempMarker) => {
           anchor: new window.naver.maps.Point(15, 40)
         }
       });
-      markerRef.current.push(marker)
+      markerRef.current.push(marker);
     });
 
     // 임시 마커는 하나만 보이도록 설정

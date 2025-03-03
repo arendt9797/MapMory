@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getRoadAddress } from '../apis/naverGetRoadAddress';
+import { getRoadAddress } from '../../apis/naverGetRoadAddress';
 
 export const useRoadAddress = (tempMarker, setRoadAddress) => {
   useEffect(() => {

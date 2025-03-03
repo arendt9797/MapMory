@@ -2,9 +2,9 @@ import { useState, useRef } from 'react';
 import NaverMap from '../components/commons/NaverMap';
 import CreatePlanCreated from '../components/features/CreatePlanCreated';
 import CreatePlanCreation from '../components/features/CreatePlanCreation';
-import useNaverMap from '../lib/hooks/useNaverMap';
-import { useMapClickListner } from '../lib/hooks/useMapClickListner';
-import { useOrderedMarkers } from '../lib/hooks/useOrderedMarkers';
+import useNaverMap from '../lib/hooks/create-plan/useNaverMap';
+import { useMapClickListner } from '../lib/hooks/create-plan/useMapClickListner';
+import { useOrderedMarkers } from '../lib/hooks/create-plan/useOrderedMarkers';
 
 const CreatePlanPage = () => {
   const mapRef = useRef(null);
@@ -24,7 +24,7 @@ const CreatePlanPage = () => {
           .map((marker, newIndex) => ({ ...marker, number: newIndex + 1 })) // 번호 재정렬
     );
     setDetailPlans((prev) => prev.filter((_, index) => index !== markerIndex));
-    useOrderedMarkers(mapRef, confirmedMarkers, beforeConfirmedMarker) // 일정도 같이 삭제
+    useOrderedMarkers(mapRef, confirmedMarkers, beforeConfirmedMarker); // 일정도 같이 삭제
   };
 
   return (
