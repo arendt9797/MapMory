@@ -1,17 +1,13 @@
-import { useEffect } from 'react';
 import Router from './app/Router';
-import { useAuthStore } from './stores/authStore';
+import AuthProvider from './stores/AuthProvider.jsx';
 
 const App = () => {
-  const initAuthListener = useAuthStore((state) => state.initAuthListener);
-
-  useEffect(() => {
-    const authListener = initAuthListener();
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
-  }, []);
-  return <Router />;
+  return (
+    <>
+      <AuthProvider />
+      <Router />
+    </>
+  );
 };
 
 export default App;

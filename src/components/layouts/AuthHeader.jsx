@@ -1,14 +1,19 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { CREATEPLAN, HOME, MYPLAN } from '../../constants/pagePaths';
-import { useAuthStore } from '../../stores/authStore';
+import { supabase } from '../../lib/apis/supabaseClient';
 
 export const AuthHeader = () => {
-  const userSignOut = useAuthStore((state) => state.userSignOut);
   const navigate = useNavigate();
-  const handleLogout = () => {
-    userSignOut();
-    alert('로그아웃 되었습니다.');
-    navigate(HOME);
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      alert('로그아웃 되었습니다.');
+      navigate(HOME);
+    } catch (err) {
+      console.error('로그아웃 중 오류 발생:', err);
+      alert('로그아웃 실패. 다시 시도해주세요.');
+    }
   };
   return (
     <div className="flex items-center gap-4">
