@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { supabase } from '../apis/supabaseClient';
 import { useNavigate } from 'react-router-dom';
+import { HOME } from '../../constants/pagePaths';
 
 const useSignInForm = () => {
   const [signInFormData, setSignInFormData] = useState({
     email: '',
     password: ''
   });
+  const [errorMessage, setErrorMessage] = useState('');
+
   const navigate = useNavigate();
 
   const handleSignInChange = (e) => {
@@ -17,14 +20,13 @@ const useSignInForm = () => {
   const handleSignInSubmit = async (e) => {
     e.preventDefault();
     const { error } = await supabase.auth.signInWithPassword(signInFormData);
-
     if (error) {
-      return alert('error 발생!');
+      return setErrorMessage('아이디와 비밀번호가 일치하지 않습니다!');
     }
-    alert('로그인 성공!');
-    navigate('/');
+    navigate(HOME);
   };
-  return { handleSignInChange, handleSignInSubmit };
+
+  return { errorMessage, handleSignInChange, handleSignInSubmit };
 };
 
 export default useSignInForm;
