@@ -6,12 +6,12 @@ import MyPlanPage from '../pages/MyPlanPage';
 import SignInPage from '../pages/SignInPage';
 import SignUpPage from '../pages/SignUpPage';
 import Layout from '../components/layouts/Layout';
-import { CREATEPLAN, DETAILPLAN, MYPLAN, SIGNIN, SIGNUP } from '../constants/pagePaths';
+import { CREATEPLAN, DETAILPLAN, HOME, MYPLAN, SIGNIN, SIGNUP } from '../constants/pagePaths';
 import ProtectedRouter from './ProtectedRouter';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: HOME,
     element: <Layout />,
     children: [
       { index: true, element: <HomePage /> },
