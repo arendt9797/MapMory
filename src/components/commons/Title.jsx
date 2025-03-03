@@ -2,25 +2,33 @@
  * 제목 컴포넌트입니다. text-bold 속성이 기본 설정되어있습니다.
  * @component
  * @example
- * <Title fontSize={'xl'} margin={'md'}>나의 여행 계획 리스트</Title>
+ * <Title theme='primary' size='4xl' className='border-2'>
+ *   내용입니다.
+ * </Title>
  *
- * @prop {string} [fontSize] - 글자 크기 ( "xl" | "2xl" | "3xl" )
- * @prop {string} [margin] - margin 크기 ( "sm" | "md" | "lg" )
+ * @prop {string} [theme] - 기본 테마, 프로젝트 primary 색상 or secondary 색상 선택, 디폴트는 secondary
+ * @prop {string} [size] - 글자 크기 ( "xl" | "2xl" | "3xl" | "4xl" | "5xl" )
+ * @prop {string} [margin] - 그 외 추가적인 스타일 유틸리티 클래스
  */
+const Title = ({ theme = 'secondary', size, className, children }) => {
+  const baseStyles = 'font-bold';
 
-const Title = ({ fontSize, margin, children }) => {
-  const sizeValue = {
+  const themeStyles = {
+    primary: 'text-primary',
+    secondary: 'text-secondary'
+  };
+
+  const sizeStyles = {
     xl: 'text-xl',
     '2xl': 'text-2xl',
-    '3xl': 'text-3xl'
+    '3xl': 'text-3xl',
+    '4xl': 'text-4xl',
+    '5xl': 'text-5xl'
   };
 
-  const marginValue = {
-    sm: 'm-2',
-    md: 'm-4',
-    lg: 'm-6'
-  };
-  return <h1 className={`${sizeValue[fontSize]} ${marginValue[margin]} text-secondary font-bold`}>{children}</h1>;
+  const styles = `${baseStyles} ${themeStyles[theme]} ${sizeStyles[size]} ${className}`;
+
+  return <h1 className={styles}>{children}</h1>;
 };
 
 export default Title;
