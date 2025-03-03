@@ -4,7 +4,9 @@ import CreatePlanCreated from '../components/features/CreatePlanCreated';
 import CreatePlanCreation from '../components/features/CreatePlanCreation';
 import useNaverMap from '../lib/hooks/create-plan/useNaverMap';
 import { useMapClickListner } from '../lib/hooks/create-plan/useMapClickListner';
-import { useOrderedMarkers } from '../lib/hooks/create-plan/useOrderedMarkers';
+import useBeforeConfirmedMarker from '../lib/hooks/create-plan/useBeforeConfirmedMarker';
+import useConfirmedMarkers from '../lib/hooks/create-plan/useConfirmedMarkers';
+import { useHandleDeleteMarker } from '../lib/hooks/create-plan/useHandleDeleteMarker';
 
 const CreatePlanPage = () => {
   const mapRef = useRef(null);
@@ -14,18 +16,10 @@ const CreatePlanPage = () => {
 
   useNaverMap(mapRef);
   useMapClickListner(mapRef, setBeforeConfirmedMarker);
-  useOrderedMarkers(mapRef, confirmedMarkers, beforeConfirmedMarker);
+  useBeforeConfirmedMarker(mapRef, beforeConfirmedMarker);
+  useConfirmedMarkers(mapRef, confirmedMarkers);
 
-  const useHandleDeleteMarker = (markerIndex) => {
-    setConfirmedMarkers(
-      (prev) =>
-        prev
-          .filter((_, index) => index !== markerIndex) // 해당 마커 삭제
-          .map((marker, newIndex) => ({ ...marker, number: newIndex + 1 })) // 번호 재정렬
-    );
-    setDetailPlans((prev) => prev.filter((_, index) => index !== markerIndex));
-    useOrderedMarkers(mapRef, confirmedMarkers, beforeConfirmedMarker); // 일정도 같이 삭제
-  };
+  const handleDeleteMarker = useHandleDeleteMarker(setConfirmedMarkers, setDetailPlans);
 
   return (
     <>
@@ -41,7 +35,7 @@ const CreatePlanPage = () => {
         <CreatePlanCreated
           detailPlans={detailPlans}
           setDetailPlans={setDetailPlans}
-          onHandleDeleteMarker={useHandleDeleteMarker}
+          onHandleDeleteMarker={handleDeleteMarker}
         />
       </div>
     </>

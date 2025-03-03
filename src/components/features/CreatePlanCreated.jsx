@@ -95,10 +95,10 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }
             />
           </div>
           <ul className="p-6 space-y-4 overflow-y-auto h-96 scrollbar scrollbar-thumb-primary scrollbar-track-transparent">
-            {detailPlans.map((detailPlan, i) => (
-              <li key={i} className="flex items-center gap-4">
+            {detailPlans.map((detailPlan, idx) => (
+              <li key={idx} className="flex items-center gap-4">
                 <div className="bg-white border-2 border-secondary p-2 rounded-full text-sm font-bold text-secondary w-8 h-8 flex items-center justify-center">
-                  {i + 1}
+                  {idx + 1}
                 </div>
                 <div>
                   <span className="text-lg font-bold text-secondary">{detailPlan.planMemo}</span>
@@ -107,7 +107,7 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }
                     <span>시간 : {detailPlan.planTime}</span>
                   </div>
                 </div>
-                <button type='button' onClick={() => onHandleDeleteMarker(i)} className='bg-red-500'>&times;</button>
+                <button type='button' onClick={() => onHandleDeleteMarker(idx)} className='bg-red-500'>&times;</button>
               </li>
             ))}
           </ul>
