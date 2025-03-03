@@ -1,35 +1,22 @@
-import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 
 /**
  * Button 컴포넌트입니다.
  * @component
  * @example
- * <Button color={'secondary'} hoverColor={'secondaryHover'} rounded={'lg'}>
+ * <Button isLink='true' theme='secondary' size='md' className='absolute'>
  *   계획짜러 가기
  * </Button>
  *
- * @prop {string} [color] - 색상 클래스명 ex)black, gray-500
- * @prop {string} [hoverColor] - 색상 클래스명 ex)black, gray-500
- * @prop {string} [rounded] - radius 크기 ( "sm" | "md" | "lg" | "xl" )
+ * @prop {boolean} [isLink] - Link 태그로 사용시 true 설정, 디폴트는 false(버튼 태그)
+ * @prop {string} [theme] - 기본 테마, 프로젝트 primary 색상 or secondary 색상 선택
+ * @prop {string} [size] - 버튼 크기 ( "sm" | "md" | "lg" )
+ * @prop {string} [className] - 그 외 추가적인 스타일 유틸리티 클래스
  */
-export const Button = ({ color, hoverColor, rounded, children, ...props }) => {
-  const roundedValue = {
-    sm: 'rounded-xl',
-    md: 'rounded-2xl',
-    lg: 'rounded-3xl',
-    xl: 'rounded-full'
-  };
-  return (
-    <button {...props} className={`bg-${color} p-2 px-4 ${roundedValue[rounded]} text-white hover:bg-${hoverColor}`}>
-      {children}
-    </button>
-  );
-};
-
-export const Button2 = ({ children, variant = 'primary', size = 'md', className = '', ...props }) => {
+export const Button = ({ isLink = false, children, theme, size, className = '', ...props }) => {
   const baseStyles = 'bg-secondary p-2 px-4 rounded-full text-white hover:bg-secondaryHover';
 
-  const variantStyles = {
+  const themeStyles = {
     primary: 'bg-primary hover:bg-primaryHover',
     secondary: 'bg-secondary hover:bg-secondaryHover'
   };
@@ -40,31 +27,13 @@ export const Button2 = ({ children, variant = 'primary', size = 'md', className 
     lg: 'px-6 py-3 text-lg'
   };
 
-  const styles = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
+  const styles = `${baseStyles} ${themeStyles[theme]} ${sizeStyles[size]} ${className}`;
 
-  return (
-    <button className={styles} {...props}>
+  return isLink ? (
+    <Link className={styles} {...props}>
       {children}
-    </button>
-  );
-};
-
-export const Button3 = ({ children, variant = 'primary', size = 'md', className = '', ...props }) => {
-  const styles = clsx(
-    'p-2 px-4 rounded-full text-white',
-    {
-      'bg-primary hover:bg-primaryHover': variant === 'primary',
-      'bg-secondary hover:bg-secondaryHover': variant === 'secondary'
-    },
-    {
-      'px-2 py-1 text-sm': size === 'sm',
-      'px-4 py-2 text-md': size === 'md',
-      'px-6 py-3 text-lg': size === 'lg'
-    },
-    className
-  );
-
-  return (
+    </Link>
+  ) : (
     <button className={styles} {...props}>
       {children}
     </button>
