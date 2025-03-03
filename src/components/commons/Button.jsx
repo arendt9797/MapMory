@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
  * @prop {string} [size] - 버튼 크기 ( "sm" | "md" | "lg" )
  * @prop {string} [className] - 그 외 추가적인 스타일 유틸리티 클래스
  */
-export const Button = ({ isLink = false, children, theme, size, className = '', ...props }) => {
+const Button = ({ isLink = false, children, theme, size, className = '', ...props }) => {
   const baseStyles = 'bg-secondary p-2 px-4 rounded-full text-white hover:bg-secondaryHover';
 
   const themeStyles = {
@@ -39,3 +39,5 @@ export const Button = ({ isLink = false, children, theme, size, className = '', 
     </button>
   );
 };
+
+export default Button;
