@@ -2,9 +2,11 @@ import { Link, Outlet } from 'react-router-dom';
 import { AuthHeader } from './AuthHeader';
 import GuestHeader from './GuestHeader';
 import { HOME } from '../../constants/pagePaths';
+import { useAuthStore } from '../../stores/authStore';
 
 const Layout = () => {
-  const isAuthenticated = false;
+  const userInfo = useAuthStore((state) => state.userInfo.isLogin);
+
   return (
     <>
       <header className="border-b-4 border-primary h-[60px] p-4 flex ">
@@ -15,7 +17,7 @@ const Layout = () => {
               <span className="text-primaryHover">M</span>AP<span className="text-primaryHover">M</span>ORY
             </p>
           </Link>
-          {isAuthenticated ? <AuthHeader /> : <GuestHeader />}
+          {userInfo ? <AuthHeader /> : <GuestHeader />}
         </nav>
       </header>
       <main>
