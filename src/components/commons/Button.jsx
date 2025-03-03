@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
  * @prop {string} [className] - 그 외 추가적인 스타일 유틸리티 클래스
  */
 const Button = ({ isLink = false, children, theme, size, className = '', ...props }) => {
-  const baseStyles = 'bg-secondary p-2 px-4 rounded-full text-white hover:bg-secondaryHover';
+  const baseStyles = 'px-4 p-2 rounded-full text-white';
 
   const themeStyles = {
     primary: 'bg-primary hover:bg-primaryHover',
