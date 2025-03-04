@@ -1,6 +1,7 @@
 import useSignUpForm from '../lib/hooks/useSignUpForm';
 import AuthForm from '../components/features/auth/AuthForm';
 import { EMAIL, NICKNAME, PASSWORD } from '../constants/formFields';
+import { SIGNIN } from '../constants/pagePaths';
 const SignUpPage = () => {
   const { signUpFormData, errorMessage, checkDuplicate, handleSignUpChange, handleSignUpSubmit } = useSignUpForm();
   const signUpFormList = [
@@ -59,7 +60,15 @@ const SignUpPage = () => {
       )
     }
   ];
-  return <AuthForm authFormList={signUpFormList} onSubmit={handleSignUpSubmit} buttonName="회원가입" />;
+  return (
+    <AuthForm
+      authFormList={signUpFormList}
+      onSubmit={handleSignUpSubmit}
+      buttonName="회원가입"
+      placeholder="회원이시라면?"
+      link={SIGNIN}
+    />
+  );
 };
 
 export default SignUpPage;

@@ -3,6 +3,7 @@ import { supabase } from '../apis/supabaseClient';
 import { useNavigate } from 'react-router-dom';
 import { authValidate } from '../utils/authValidate';
 import { EMAIL, NICKNAME } from '../../constants/formFields';
+import { HOME } from '../../constants/pagePaths';
 
 const useSignUpForm = () => {
   const navigate = useNavigate();
@@ -81,8 +82,8 @@ const useSignUpForm = () => {
       return alert('회원가입 실패! 다시 시도해주세요.');
     }
 
-    alert('회원가입 성공! 로그인 페이지로 이동합니다.');
-    navigate('/signIn');
+    alert('회원가입 성공! 자동으로 로그인 됩니다!');
+    navigate(HOME);
   };
 
   return { signUpFormData, errorMessage, isDuplicateChecked, handleSignUpChange, handleSignUpSubmit, checkDuplicate };
