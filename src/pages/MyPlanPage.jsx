@@ -3,14 +3,14 @@ import GridBox from '../components/features/myPlanPage/GridBox';
 import MyPlanCard from '../components/features/myPlanPage/MyPlanCard';
 import StatusPage from '../components/features/myPlanPage/StatusPage';
 import Button from '../components/commons/Button';
-import { AUTH_STORAGE } from '../constants/storageKey';
+import { AUTH_STORAGE, AUTH_TOKEN } from '../constants/storageKey';
 import useMyPlan from '../lib/hooks/useMyPlan';
 
 const MyPlanPage = () => {
-  const testId = 'd0d35038-4aac-4eb1-a625-0775e2c64087';
   const nickname = JSON.parse(localStorage.getItem(AUTH_STORAGE)).state.userInfo.nickname;
+  const userId = JSON.parse(localStorage.getItem(AUTH_TOKEN)).user.id;
 
-  const { data, error, fetchNextPage, hasNextPage, isFetching, isLoading } = useMyPlan(testId);
+  const { data, error, fetchNextPage, hasNextPage, isFetching, isLoading } = useMyPlan(userId);
 
   if (error) {
     return <StatusPage>오류가 발생했습니다.</StatusPage>;
