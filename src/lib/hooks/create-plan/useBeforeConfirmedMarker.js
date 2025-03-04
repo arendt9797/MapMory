@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { makeTempIcon } from '../../utils/makeMarkerIcon';
+import { markerFile } from '../../../constants/naverMap';
 
 const useBeforeConfirmedMarker = (mapRef, tempMarker) => {
   const tempMarkerRef = useRef(null);
@@ -19,7 +20,7 @@ const useBeforeConfirmedMarker = (mapRef, tempMarker) => {
         map: mapRef.current,
         icon: {
           content: makeTempIcon(),
-          anchor: new window.naver.maps.Point(15, 40)
+          anchor: new window.naver.maps.Point(markerFile.ANCHORPOINT_X, markerFile.ANCHORPOINT_Y)
         }
       });
     }

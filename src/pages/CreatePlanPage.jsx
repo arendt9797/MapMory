@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
-import NaverMap from '../components/commons/NaverMap';
-import CreatePlanCreated from '../components/features/CreatePlanCreated';
-import CreatePlanCreation from '../components/features/CreatePlanCreation';
+import NaverMap from '../components/features/create-plan-page/NaverMap';
+import CreatePlanCreated from '../components/features/create-plan-page/CreatePlanCreated';
+import CreatePlanCreation from '../components/features/create-plan-page/CreatePlanCreation';
 import useNaverMap from '../lib/hooks/create-plan/useNaverMap';
 import { useMapClickListner } from '../lib/hooks/create-plan/useMapClickListner';
 import useBeforeConfirmedMarker from '../lib/hooks/create-plan/useBeforeConfirmedMarker';

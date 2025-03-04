@@ -1,30 +1,20 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../../lib/apis/supabaseClient';
+import { supabase } from '../../../lib/apis/supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import { HOME, MYPLAN } from '../../constants/pagePaths';
-import Button from '../commons/Button';
-import Title from '../commons/Title';
-import Text from '../commons/Text';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { mutatePlans } from '../../lib/apis/mutatePlans';
+import { HOME, MYPLAN } from '../../../constants/pagePaths';
+import Button from '../../commons/Button';
+import Title from '../../commons/Title';
+import Text from '../../commons/Text';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { mutatePlans } from '../../../lib/apis/mutatePlans';
+import { useUserId } from '../../../lib/hooks/create-plan/useUserId.js'
+import { QUERY_KEYS } from '../../../constants/queryKeys';
 
 const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }) => {
   const navigate = useNavigate();
   const [planTitle, setPlanTitle] = useState('');
-  const [userId, setUserId] = useState(null);
-  useEffect(() => {
-    const fetchUserId = async () => {
-      const { data: userData, error } = await supabase.auth.getUser();
-      if (error) {
-        alert('유저 정보를 가져오는 중 오류 발생: ', error);
-        return;
-      }
-      setUserId(userData.user.id);
-    };
-
-    fetchUserId();
-  }, []);
-
+  
+  const userId = useUserId();
   // const handleSavePlan = async (e) => {
   //   e.preventDefault();
   //   if (!planTitle) {
@@ -79,7 +69,7 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }
   const { mutate: updatePlans } = useMutation({
     mutationFn: mutatePlans,
     onSuccess: () => {
-      queryClient.invalidateQueries(['detailPlansData']);
+      queryClient.invalidateQueries([QUERY_KEYS.DETAILPLANSDATA]);
       alert('저장 완료!');
       setDetailPlans([]);
       setPlanTitle('');

@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { makeConfirmedIcon } from '../../utils/makeMarkerIcon';
+import { markerFile } from '../../../constants/naverMap';
 
 const useConfirmedMarkers = (mapRef, confirmedMarkers) => {
   const markerRef = useRef([]);
@@ -17,7 +18,7 @@ const useConfirmedMarkers = (mapRef, confirmedMarkers) => {
         map: mapRef.current,
         icon: {
           content: makeConfirmedIcon(number),
-          anchor: new window.naver.maps.Point(15, 40)
+          anchor: new window.naver.maps.Point(markerFile.ANCHORPOINT_X, markerFile.ANCHORPOINT_Y)
         }
       });
       markerRef.current.push(marker);

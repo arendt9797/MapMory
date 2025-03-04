@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { mapCreateFile } from '../../../constants/naverMap';
 
 const useNaverMap = (mapRef) => {
   const { naver } = window;
@@ -8,7 +9,7 @@ const useNaverMap = (mapRef) => {
       scaleControl: false,
       mapDataControl: false,
       zoomControl: true,
-      zoom: 17
+      zoom: mapCreateFile.ZOOM
     });
   }, []);
 };
