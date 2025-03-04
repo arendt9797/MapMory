@@ -1,3 +1,4 @@
+import { supabaseItems } from '../../constants/supabaseConstants';
 import { supabase } from './supabaseClient';
 
 /**
@@ -10,7 +11,7 @@ export const mutatePlans = async ({ planTitle, detailPlans, userId }) => {
 
   // 'plans' 테이블 업데이트
   const { data: planData, error: plansError } = await supabase
-    .from('plans')
+    .from(supabaseItems.PLANS)
     .upsert({
       user_id: userId,
       title: planTitle
@@ -24,7 +25,7 @@ export const mutatePlans = async ({ planTitle, detailPlans, userId }) => {
 
   // 'detail_plans' 테이블 업데이트
   const detailPlanPromises = detailPlans.map((detailPlan) =>
-    supabase.from('detail_plans').insert({
+    supabase.from(supabaseItems.DETAILPLANS).insert({
       place: detailPlan.place,
       map_point: detailPlan.mapPoint,
       plan_date: detailPlan.planDate,

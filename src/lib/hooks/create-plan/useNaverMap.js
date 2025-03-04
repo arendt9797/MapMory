@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { mapCreateFile } from '../../../constants/naverMap';
+import { mapCreateFile, planMapFile } from '../../../constants/naverMap';
 
 const useNaverMap = (mapRef) => {
   const { naver } = window;
   useEffect(() => {
-    mapRef.current = new naver.maps.Map('map', {
+    mapRef.current = new naver.maps.Map(planMapFile.MAPID, {
       logoControl: false,
       scaleControl: false,
       mapDataControl: false,

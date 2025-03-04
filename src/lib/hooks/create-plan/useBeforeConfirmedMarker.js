@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { makeTempIcon } from '../../utils/makeMarkerIcon';
 import { markerFile } from '../../../constants/naverMap';
 
