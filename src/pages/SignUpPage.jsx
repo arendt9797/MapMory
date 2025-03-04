@@ -2,7 +2,9 @@ import useSignUpForm from '../lib/hooks/useSignUpForm';
 import AuthForm from '../components/features/auth/AuthForm';
 import { EMAIL, NICKNAME, PASSWORD } from '../constants/formFields';
 import { SIGNIN } from '../constants/pagePaths';
+import Button from '../components/commons/Button';
 const SignUpPage = () => {
+  const DUPLICATION = '중복 확인';
   const { signUpFormData, errorMessage, checkDuplicate, handleSignUpChange, handleSignUpSubmit } = useSignUpForm();
   const signUpFormList = [
     {
@@ -14,13 +16,15 @@ const SignUpPage = () => {
       onChange: handleSignUpChange,
       errorMessage: errorMessage.email,
       button: (
-        <button
+        <Button
           type="button"
+          theme="secondary"
+          size="sm"
           onClick={() => checkDuplicate(EMAIL)}
-          className="px-3 py-2 text-sm bg-secondary hover:bg-secondaryHover rounded-md"
+          className="px-3 py-2 rounded-md"
         >
-          중복 확인
-        </button>
+          {DUPLICATION}
+        </Button>
       )
     },
     {
@@ -50,13 +54,15 @@ const SignUpPage = () => {
       onChange: handleSignUpChange,
       errorMessage: errorMessage.nickname,
       button: (
-        <button
+        <Button
           type="button"
-          onClick={() => checkDuplicate(NICKNAME)}
-          className="px-3 py-2 text-sm bg-secondary hover:bg-secondaryHover rounded-md"
+          theme="secondary"
+          size="sm"
+          onClick={() => checkDuplicate(EMAIL)}
+          className="px-3 py-2 rounded-md"
         >
-          중복 확인
-        </button>
+          {DUPLICATION}
+        </Button>
       )
     }
   ];
