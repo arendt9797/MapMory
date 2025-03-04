@@ -1,93 +1,25 @@
-import { useState, useEffect } from 'react';
-import { supabase } from '../../../lib/apis/supabaseClient';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { HOME, MYPLAN } from '../../../constants/pagePaths';
+import { HOME } from '../../../constants/pagePaths';
 import Button from '../../commons/Button';
 import Title from '../../commons/Title';
 import Text from '../../commons/Text';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { mutatePlans } from '../../../lib/apis/mutatePlans';
-import { useUserId } from '../../../lib/hooks/create-plan/useUserId.js'
-import { QUERY_KEYS } from '../../../constants/queryKeys';
+import { useUserId } from '../../../lib/hooks/create-plan/useUserId.js';
+import { useMutatePlans } from '../../../lib/hooks/create-plan/useMutatePlans.js';
 
 const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }) => {
   const navigate = useNavigate();
   const [planTitle, setPlanTitle] = useState('');
-  
   const userId = useUserId();
-  // const handleSavePlan = async (e) => {
-  //   e.preventDefault();
-  //   if (!planTitle) {
-  //     alert('계획 이름을 입력해주세요!');
-  //     return;
-  //   }
-  //   if (detailPlans.length === 0) {
-  //     alert('최소 1개 이상의 일정을 추가해주세요!');
-  //     return;
-  //   }
-
-  //   // 'plans'테이블에 계획 추가
-  //   const { data: planData, error: plansError } = await supabase
-  //     .from('plans')
-  //     .upsert({
-  //       user_id: userId,
-  //       title: planTitle
-  //     })
-  //     .select()
-  //     .single();
-
-  //   if (plansError) {
-  //     console.error('계획 저장 실패:', plansError.message);
-  //     return;
-  //   }
-
-  //   const planId = planData.id;
-
-  //   // 'detail_plans'테이블에 일정 추가
-  //   detailPlans.map(async (detailPlan) => {
-  //     const { error: detailPlanError } = await supabase.from('detail_plans').insert({
-  //       place: detailPlan.place,
-  //       map_point: detailPlan.mapPoint,
-  //       plan_date: detailPlan.planDate,
-  //       plan_time: detailPlan.planTime,
-  //       plan_memo: detailPlan.planMemo,
-  //       plan_id: planId
-  //     });
-  //     if (detailPlanError) {
-  //       console.error('❌ 일정 저장 실패:', detailPlanError.message);
-  //       return;
-  //     }
-  //   });
-  //   alert('저장 완료!');
-  //   setDetailPlans([]); // 저장 후 일정 목록 초기화
-  //   setPlanTitle(''); // 계획 이름 초기화
-  //   navigate(MYPLAN);
-  // };
-  
-  // =====TQ로 표현하기=====
-  const queryClient = useQueryClient();
-  const { mutate: updatePlans } = useMutation({
-    mutationFn: mutatePlans,
-    onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEYS.DETAILPLANSDATA]);
-      alert('저장 완료!');
-      setDetailPlans([]);
-      setPlanTitle('');
-      navigate(MYPLAN);
-    },
-    onError: (error) => {
-      alert(error.message);
-    }
-  });
+  const updatePlans = useMutatePlans(setDetailPlans, setPlanTitle);
 
   const handleSavePlan = (e) => {
     e.preventDefault();
     updatePlans({ planTitle, detailPlans, userId });
   };
-  // =========================
 
   const handleCancel = () => {
-    setDetailPlans([]); // 저장 후 일정 목록 초기화
+    setDetailPlans([]); // 일정 목록 초기화
     setPlanTitle(''); // 계획 이름 초기화
     navigate(HOME);
   };
