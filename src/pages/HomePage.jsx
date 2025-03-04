@@ -14,7 +14,6 @@ const HomePage = () => {
   useEffect(() => {
     //내위치
     if (navigator.geolocation) {
-      //지도불러오는중 추가하기
       navigator.geolocation.getCurrentPosition((position) => {
         setLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
         setIsLoading(false);
@@ -71,19 +70,16 @@ const HomePage = () => {
             <circle cx="12" cy="12" r="10" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M2 12a10 10 0 0116-6" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          {/* 로딩 텍스트 */}
           <span>위치를 불러오는 중입니다...</span>
         </div>
       ) : (
-        <div id="mapDiv" ref={mapRef} style={{ width: '100%', height: '100%' }}>
-          지도 api
-        </div>
+        <div id="mapDiv" ref={mapRef} style={{ width: '100%', height: '100%' }}></div>
       )}
 
       {address.jibunAddress && (
         <div className="absolute right-5 top-5 p-4 bg-white h-50 flex flex-col items-center gap-4 rounded-md shadow-md">
           <p>{address.jibunAddress}</p>
-          <Button to={CREATEPLAN} isLink="true" theme="secondary" size="lg">
+          <Button to={CREATEPLAN} isLink="true" theme="secondary" size="md">
             계획 짜러 가기
           </Button>
         </div>
