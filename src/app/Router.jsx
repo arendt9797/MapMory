@@ -19,12 +19,16 @@ const router = createBrowserRouter([
         path: '',
         element: <ProtectedRouter />,
         children: [
-          { path: CREATEPLAN, element: <CreatePlanPage /> },
           { path: `${DETAILPLAN}/:id`, element: <DetailPlanPage /> },
           { path: MYPLAN, element: <MyPlanPage /> }
         ]
       }
     ]
+  },
+  {
+    path: '',
+    element: <ProtectedRouter />,
+    children: [{ path: CREATEPLAN, element: <CreatePlanPage /> }]
   },
   { path: SIGNUP, element: <SignUpPage /> },
   { path: SIGNIN, element: <SignInPage /> }
