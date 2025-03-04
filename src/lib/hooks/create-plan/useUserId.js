@@ -13,6 +13,6 @@ export const useUserId = () => {
     getUser();
   }, []);
 
-  return user?.id;
+  return user
 };
 
