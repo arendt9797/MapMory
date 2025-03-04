@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { CREATEPLAN } from '../constants/pagePaths';
 import Button from '../components/commons/Button';
 import useLocationStore from '../stores/locationStore';
-import { mapCreateFile } from '../constants/naverMap';
+import { homeMarkerFile, mapCreateFile } from '../constants/naverMap';
+import { addLocationIcon, myLocationIcon } from '../lib/utils/makeMarkerIcon';
 
 const HomePage = () => {
   const mapRef = useRef(null);
@@ -37,13 +38,8 @@ const HomePage = () => {
         position: new window.naver.maps.LatLng(location.lat, location.lng),
         map: naverMap,
         icon: {
-          content: `
-            <div style="position: relative;  padding: 10px; background-color: #67BCC4; color: white; font-size: 14px; font-weight: bold; border-radius: 10px; text-align: center;">
-              내위치
-              <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid #67BCC4;"></div>
-            </div>
-          `,
-          anchor: new window.naver.maps.Point(25, 25)
+          content: myLocationIcon(),
+          anchor: new window.naver.maps.Point(homeMarkerFile.ANCHORPOINT_X, homeMarkerFile.ANCHORPOINT_Y)
         }
       });
       //클릭이벤트
@@ -69,12 +65,8 @@ const HomePage = () => {
           position: latlng,
           map: naverMap,
           icon: {
-            content: `
-              <div style="width: 60px; height: 60px; border:3px dashed #486284; background-color: #67BCC4; color: white; display: flex;justify-content: center; align-items: center; border-radius: 50%; font-size: 14px; font-weight: bold; text-align:center;">
-                여기로<br>갈까요?
-              </div>
-            `,
-            anchor: new window.naver.maps.Point(25, 25)
+            content: addLocationIcon(),
+            anchor: new window.naver.maps.Point(homeMarkerFile.ANCHORPOINT_X, homeMarkerFile.ANCHORPOINT_Y)
           }
         });
         markerRef.current = newMarker;

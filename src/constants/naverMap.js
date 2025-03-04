@@ -17,3 +17,9 @@ export const markerFile = {
   ANCHORPOINT_X: 15,
   ANCHORPOINT_Y: 40
 };
+
+export const homeMarkerFile = {
+  CLICK: 'click',
+  ANCHORPOINT_X: 25,
+  ANCHORPOINT_Y: 25
+};
