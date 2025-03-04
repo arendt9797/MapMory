@@ -12,6 +12,7 @@ export const planMapFile = {
 };
 
 export const markerFile = {
+  ANCHORPOINT: 15,
   ZOOM: 3,
   CLICK: 'click',
   ANCHORPOINT_X: 15,
