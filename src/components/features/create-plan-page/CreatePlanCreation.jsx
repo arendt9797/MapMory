@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useRoadAddress } from '../../../lib/hooks/create-plan/useRoadAddress';
+import { useJibunAddress } from '../../../lib/hooks/create-plan/useJibunAddress';
 import { calculateMinDate } from '../../../lib/utils/calculateMinDate';
 import { useCreatePlanCreation } from '../../../lib/hooks/create-plan/useCreatePlanCreation';
 import Button from '../../commons/Button';
@@ -7,15 +7,15 @@ import Text from '../../commons/Text';
 import { MAX_LENGTH } from '../../../constants/formFields';
 
 const CreatePlanCreation = ({ setConfirmedMarkers, tempMarker, setTempMarker, detailPlans, setDetailPlans }) => {
-  const [roadAddress, setRoadAddress] = useState('');
-  useRoadAddress(tempMarker, setRoadAddress);
+  const [jibunAddress, setJibunAddress] = useState('');
+  useJibunAddress(tempMarker, setJibunAddress);
   const { plan, handleChange, handleSubmit } = useCreatePlanCreation(
     setConfirmedMarkers,
     tempMarker,
     setTempMarker,
     setDetailPlans,
-    roadAddress,
-    setRoadAddress
+    jibunAddress,
+    setJibunAddress
   );
 
   const minDate = calculateMinDate(detailPlans);
@@ -35,7 +35,7 @@ const CreatePlanCreation = ({ setConfirmedMarkers, tempMarker, setTempMarker, de
             required
           />
           <Text theme={'secondary'} size={'sm'} className="font-bold ml-2">
-            {roadAddress}
+            {jibunAddress}
           </Text>
           <hr className="my-4" />
           <div className="flex justify-between">
