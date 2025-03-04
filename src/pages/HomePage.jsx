@@ -49,7 +49,7 @@ const HomePage = () => {
         window.naver.maps.Service.reverseGeocode(
           {
             coords: latlng,
-            orders: [window.naver.maps.Service.OrderType.ADDR]
+            orders: window.naver.maps.Service.OrderType.ADDR
           },
           function (status, response) {
             const result = response.v2;
