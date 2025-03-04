@@ -4,13 +4,13 @@ import DetailPlanMap from '../components/features/DetailPlanMap';
 import StatusPage from '../components/features/myPlanPage/StatusPage';
 import { useEffect } from 'react';
 import { useDetailPlan } from '../lib/hooks/useDetailPlan';
+import { DetailPlanList } from '../components/features/DetailPlanList';
 
 const DetailPlanPage = () => {
   const { id } = useParams();
   const [plan, setPlan] = useState({});
   const [detailPlans, setDetailPlans] = useState([]);
-  const [markerMemo, setMarkerMemo] = useState('');
-  let day = 0;
+  const [markerMemo, setMarkerMemo] = useState('다음은 무엇을 할까요?');
 
   // params에 해당하는 plan 호출
   const { planData, isDataError, isDataPending } = useDetailPlan(id);
@@ -23,7 +23,7 @@ const DetailPlanPage = () => {
 
       setDetailPlans(sortByTime);
     }
-  }, [planData]);
+  }, [id, planData]);
 
   if (isDataError) {
     return <StatusPage>오류가 발생했습니다.</StatusPage>;
@@ -34,35 +34,15 @@ const DetailPlanPage = () => {
   }
 
   return (
-    <div>
-      <h2>{plan.title}</h2>
+    <div className="relative h-[calc(100vh-60px)]">
       {detailPlans.length > 0 ? (
-        <DetailPlanMap detailPlans={detailPlans} setMarkerMemo={setMarkerMemo} />
+        <>
+          <DetailPlanMap detailPlans={detailPlans} setMarkerMemo={setMarkerMemo} />
+          <DetailPlanList detailPlans={detailPlans} markerMemo={markerMemo} plan={plan} />
+        </>
       ) : (
         `지도 정보를 불러오고 있습니다.`
       )}
-      <div>{markerMemo}</div>
-      <div>
-        <div>
-          <ul>
-            {detailPlans.map((plan, index, arr) => {
-              const checkDay = () => {
-                return index === 0 || arr[index - 1].plan_date !== arr[index].plan_date;
-              };
-
-              return (
-                <li key={plan.id}>
-                  {checkDay() && <p>{(day += 1)}일차</p>}
-                  <p>{`제목: ${plan.plan_memo}`}</p>
-                  <p>{plan.plan_date}</p>
-                  <p>{plan.plan_time}</p>
-                  <p>{plan.place}</p>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
     </div>
   );
 };

@@ -29,8 +29,6 @@ export const getPlan = async (id) => {
     .select(`*,${supabaseItems.DETAILPLANS}(*)`)
     .eq(supabaseItems.ID, id)
     .single();
-  if (error) {
-    console.error(error);
-  }
+  if (error) alert('에러 발생', error.message);
   return data;
 };
