@@ -6,10 +6,8 @@ import { CREATEPLAN } from '../constants/pagePaths';
 import Button from '../components/commons/Button';
 import locationStore from '../stores/locationStore';
 
-// import { CREATEPLAN } from '../constants/pagePaths';
 const HomePage = () => {
   const mapRef = useRef(null);
-  //기본 위치값(사용자위치 못가져왔을때 서울로)
   const [location, setLocation] = useState({});
   const [address, setAddress] = useState({});
   const { selectedLocation, setSelectedLocation } = locationStore();
