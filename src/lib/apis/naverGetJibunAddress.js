@@ -1,5 +1,5 @@
 // 좌표 → 주소 변환
-export const getRoadAddress = async (tempMarker) => {
+export const getJibunAddress = async (tempMarker) => {
   const { naver } = window;
 
   return new Promise((resolve, reject) => {
@@ -14,7 +14,7 @@ export const getRoadAddress = async (tempMarker) => {
           return reject('주소 조회 실패');
         }
         const addresses = response.v2.address;
-        const address = addresses.roadAddress || addresses.jibunAddress;
+        const address = addresses.jibunAddress || addresses.roadAddress;
         resolve(address);
       }
     );

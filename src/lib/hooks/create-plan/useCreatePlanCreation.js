@@ -5,8 +5,8 @@ export const useCreatePlanCreation = (
   tempMarker,
   setTempMarker,
   setDetailPlans,
-  roadAddress,
-  setRoadAddress
+  jibunAddress,
+  setJibunAddress
 ) => {
   const [plan, setPlan] = useState({
     memo: '',
@@ -30,7 +30,7 @@ export const useCreatePlanCreation = (
     setDetailPlans((prev) => [
       ...prev,
       {
-        place: roadAddress,
+        place: jibunAddress,
         planDate: plan.date,
         planTime: plan.time,
         planMemo: plan.memo,
@@ -40,7 +40,7 @@ export const useCreatePlanCreation = (
 
     // 입력 필드 초기화 및 임시 마커 제거
     setPlan({ memo: '', date: '', time: '' });
-    setRoadAddress('');
+    setJibunAddress('');
     setTempMarker(null);
   };
 

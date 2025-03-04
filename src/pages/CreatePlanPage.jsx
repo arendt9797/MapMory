@@ -7,14 +7,16 @@ import { useMapClickListner } from '../lib/hooks/create-plan/useMapClickListner'
 import useBeforeConfirmedMarker from '../lib/hooks/create-plan/useBeforeConfirmedMarker';
 import useConfirmedMarkers from '../lib/hooks/create-plan/useConfirmedMarkers';
 import { useHandleDeleteMarker } from '../lib/hooks/create-plan/useHandleDeleteMarker';
+import useLocationStore from '../stores/locationStore';
 
 const CreatePlanPage = () => {
   const mapRef = useRef(null);
+  const selectedLocation = useLocationStore((state) => state.selectedLocation);
   const [confirmedMarkers, setConfirmedMarkers] = useState([]);
   const [beforeConfirmedMarker, setBeforeConfirmedMarker] = useState(null);
   const [detailPlans, setDetailPlans] = useState([]);
 
-  useNaverMap(mapRef);
+  useNaverMap(mapRef, selectedLocation);
   useMapClickListner(mapRef, setBeforeConfirmedMarker);
   useBeforeConfirmedMarker(mapRef, beforeConfirmedMarker);
   useConfirmedMarkers(mapRef, confirmedMarkers);
