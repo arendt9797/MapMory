@@ -1,14 +1,14 @@
 const processPlansData = (detail_plans) => {
-  const sortList = [...detail_plans].sort((a, b) => a.plan_date.localeCompare(b.plan_date));
-
-  const datedPlansObj = sortList.reduce((acc, cur) => {
-    acc[cur.plan_date] = acc[cur.plan_date] || [];
-    acc[cur.plan_date].push(cur.place);
+  const datedPlansObj = detail_plans.reduce((acc, cur) => {
+    const PLAN_DATE = cur.plan_date;
+    const PLAN_MEMO = cur.plan_memo;
+    acc[PLAN_DATE] = acc[PLAN_DATE] || [];
+    acc[PLAN_DATE].push(PLAN_MEMO);
     return acc;
   }, {});
 
-  const datedPlansArr = Object.entries(datedPlansObj).map(([date, place]) => {
-    return { date: date, places: place };
+  const datedPlansArr = Object.entries(datedPlansObj).map(([date, memo]) => {
+    return { date: date, memo: memo };
   });
 
   return datedPlansArr;
