@@ -1,14 +1,20 @@
 import { AUTH_STORAGE } from '../../../constants/storageKey';
+import Text from '../../commons/Text';
 import Title from '../../commons/Title';
+import MainContainer from './MainContainer';
 
 const StatusPage = ({ children }) => {
   const nickname = JSON.parse(localStorage.getItem(AUTH_STORAGE)).state.userInfo.nickname;
 
   return (
-    <main className="p-10 flex flex-col justify-center items-center">
-      <Title size={'3xl'}>{nickname}의 여행 계획 리스트</Title>
-      <div className="w-4/5 flex justify-center h-52 items-center">{children}</div>
-    </main>
+    <MainContainer>
+      <Title size={'3xl'} className="m-5">
+        {nickname}의 여행 계획 리스트
+      </Title>
+      <div className="w-4/5 m-5 flex justify-center h-96 items-center bg-gray-50">
+        <Text size="xl">{children}</Text>
+      </div>
+    </MainContainer>
   );
 };
 

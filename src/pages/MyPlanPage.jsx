@@ -5,6 +5,7 @@ import StatusPage from '../components/features/myPlanPage/StatusPage';
 import Button from '../components/commons/Button';
 import useMyPlan from '../lib/hooks/useMyPlan';
 import { useAuthStore } from '../stores/authStore';
+import MainContainer from '../components/features/myPlanPage/MainContainer';
 
 const MyPlanPage = () => {
   const nickname = useAuthStore((state) => state.userInfo.nickname);
@@ -15,7 +16,7 @@ const MyPlanPage = () => {
   if (data.pages[0].length === 0) return <StatusPage>계획을 추가해주세요!</StatusPage>;
 
   return (
-    <main className="p-10 flex flex-col justify-center items-center m-">
+    <MainContainer>
       <Title size={'3xl'} className="m-5">
         {nickname}의 여행 계획 리스트
       </Title>
@@ -25,7 +26,7 @@ const MyPlanPage = () => {
           {isFetching ? '로딩중...' : '더보기 +'}
         </Button>
       )}
-    </main>
+    </MainContainer>
   );
 };
 
