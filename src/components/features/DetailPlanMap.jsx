@@ -48,14 +48,7 @@ const DetailPlanMap = ({ detailPlans, setMarkerMemo }) => {
 
   return (
     <>
-      <div
-        ref={mapRef}
-        id={planMapFile.MAPID}
-        style={{
-          width: '500px', // 스타일링시 추후 변경
-          height: '500px'
-        }}
-      />
+      <div ref={mapRef} id={planMapFile.MAPID} className="h-[100%]" />
     </>
   );
 };
