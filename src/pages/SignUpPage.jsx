@@ -58,7 +58,7 @@ const SignUpPage = () => {
           type="button"
           theme="secondary"
           size="sm"
-          onClick={() => checkDuplicate(EMAIL)}
+          onClick={() => checkDuplicate(NICKNAME)}
           className="px-3 py-2 rounded-md"
         >
           {DUPLICATION}
