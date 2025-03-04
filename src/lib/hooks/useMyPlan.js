@@ -2,11 +2,11 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '../../constants/queryKeys';
 import { getMyPlans } from '../apis/planApi';
 
-const useMyPlan = (id) => {
+const useMyPlan = () => {
   const limit = 3;
   const response = useInfiniteQuery({
     queryKey: [QUERY_KEYS.PLANS],
-    queryFn: ({ pageParam = 1 }) => getMyPlans(id, limit, pageParam),
+    queryFn: ({ pageParam = 1 }) => getMyPlans(limit, pageParam),
     getNextPageParam: (lastPage, allPages) => {
       const totalPlans = allPages.flat().length;
       const nextPage = Math.floor(totalPlans / limit) + 1;

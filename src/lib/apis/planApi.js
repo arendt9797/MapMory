@@ -1,7 +1,7 @@
 import { supabaseItems } from '../../constants/supabaseConstants';
 import { supabase } from './supabaseClient';
 
-export const getMyPlans = async (id, limit, pageParam) => {
+export const getMyPlans = async (limit, pageParam) => {
   const getUserId = async () => {
     const { data, error } = await supabase.auth.getUser();
     if (error) {
