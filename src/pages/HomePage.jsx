@@ -2,13 +2,17 @@
 
 import { useState } from 'react';
 import { useEffect, useRef } from 'react';
+import { CREATEPLAN } from '../constants/pagePaths';
+import Button from '../components/commons/Button';
+import locationStore from '../stores/locationStore';
 
 // import { CREATEPLAN } from '../constants/pagePaths';
 const HomePage = () => {
   const mapRef = useRef(null);
   //기본 위치값(사용자위치 못가져왔을때 서울로)
-  const [location, setLocation] = useState({ lat: 37.5666103, lng: 126.9783882 });
-  const [address, setAddress] = useState({}); // 주소를 저장할 상태 변수 추가
+  const [location, setLocation] = useState({});
+  const [address, setAddress] = useState({});
+  const { selectedLocation, setSelectedLocation } = locationStore();
 
   useEffect(() => {
     //내위치
@@ -17,7 +21,7 @@ const HomePage = () => {
         setLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
       });
     } else {
-      setLocation();
+      setLocation({ lat: 37.5666103, lng: 126.9783882 });
     }
   }, []);
 
@@ -36,17 +40,17 @@ const HomePage = () => {
       //클릭이벤트
       window.naver.maps.Event.addListener(naverMap, 'click', (e) => {
         const latlng = e.latlng;
+        setSelectedLocation({ lat: latlng.y, lng: latlng.x });
+        console.log(selectedLocation);
         window.naver.maps.Service.reverseGeocode(
           {
-            coords: latlng, // 클릭한 위치 좌표
+            coords: latlng,
             orders: [window.naver.maps.Service.OrderType.ADDR]
           },
           function (status, response) {
-            const result = response.v2; // 검색 결과의 컨테이너
-            const address = result.address; // 검색 결과로 만든 주소
+            const result = response.v2;
+            const address = result.address;
             setAddress(address);
-            console.log(address);
-            // do Something
           }
         );
       });
@@ -59,7 +63,12 @@ const HomePage = () => {
         지도 api
       </div>
       {address.jibunAddress && (
-        <div className="absolute right-0 top-0 p-4 bg-white h-full">{`${address.jibunAddress}`}</div>
+        <div className="absolute right-5 top-5 p-4 bg-white h-50 flex flex-col items-center gap-4">
+          <p>{address.jibunAddress}</p>
+          <Button to={CREATEPLAN} isLink="true" theme="secondary" size="lg">
+            계획 짜러 가기
+          </Button>
+        </div>
       )}
     </div>
   );
