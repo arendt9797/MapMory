@@ -17,7 +17,7 @@ const SignUpPage = () => {
         <button
           type="button"
           onClick={() => checkDuplicate(EMAIL)}
-          className="px-3 py-2 text-sm bg-gray-300 hover:bg-gray-400 rounded-md"
+          className="px-3 py-2 text-sm bg-secondary hover:bg-secondaryHover rounded-md"
         >
           중복 확인
         </button>
@@ -53,7 +53,7 @@ const SignUpPage = () => {
         <button
           type="button"
           onClick={() => checkDuplicate(NICKNAME)}
-          className="px-3 py-2 text-sm bg-gray-300 hover:bg-gray-400 rounded-md"
+          className="px-3 py-2 text-sm bg-secondary hover:bg-secondaryHover rounded-md"
         >
           중복 확인
         </button>
