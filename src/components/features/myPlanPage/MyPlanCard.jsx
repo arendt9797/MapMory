@@ -5,6 +5,7 @@ import Title from '../../commons/Title';
 import ContentsContainer from './ContentsContainer';
 import Text from '../../commons/Text';
 import { DETAILPLAN } from '../../../constants/pagePaths';
+import { thumbnails } from '../../../constants/thumbnails';
 
 const MyPlanCard = ({ item }) => {
   const { id, title, detail_plans } = item;
@@ -14,10 +15,15 @@ const MyPlanCard = ({ item }) => {
   const endDate = datedPlansArr[datedPlansArr.length - 1].date;
   const plans = datedPlansArr.map((item, index) => `${index + 1}일차: ${item.memo.join(', ')}`);
 
+  const randomIndex =  Math.floor(Math.random() * thumbnails.length);
+  
   return (
     <Link to={`${DETAILPLAN}/${id}`}>
       <CardContainer>
-        <div className="h-48 bg-gray-100 flex justify-center items-center">지도 이미지가 들어갈</div>
+        <div
+          className="h-48 bg-gray-100 flex justify-center items-center bg-cover"
+          style={{ backgroundImage: `url(${thumbnails[randomIndex]})` }}
+        ></div>
         <ContentsContainer>
           <Text size="sm" theme="secondary">{`${startDate} ~ ${endDate}의 일정`}</Text>
           <Title size={'xl'}>{title}</Title>
