@@ -3,5 +3,6 @@ export const supabaseItems = {
   DETAILPLANS: 'detail_plans',
   PLANDATE: 'plan_date',
   PLANTIME: 'plan_time',
-  ID: 'id'
+  ID: 'id',
+  USER_ID: 'user_id'
 };

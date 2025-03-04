@@ -12,7 +12,7 @@ const MyPlanCard = ({ item }) => {
 
   const startDate = datedPlansArr[0].date;
   const endDate = datedPlansArr[datedPlansArr.length - 1].date;
-  const plans = datedPlansArr.map((item, index) => `${index + 1}일차: ${item.places.join(', ')}`);
+  const plans = datedPlansArr.map((item, index) => `${index + 1}일차: ${item.memo.join(', ')}`);
 
   return (
     <Link to={`${DETAILPLAN}/${id}`}>
