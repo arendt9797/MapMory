@@ -61,7 +61,7 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }
                 </div>
                 <Button
                   type="button"
-                  className="bg-red-400 px-0 py-0 w-6 h-6"
+                  className="bg-red-400 px-1 w-6 h-6 flex items-center justify-center"
                   onClick={() => onHandleDeleteMarker(idx)}
                 >
                   &times;
