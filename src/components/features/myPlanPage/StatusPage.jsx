@@ -1,10 +1,10 @@
-import { AUTH_STORAGE } from '../../../constants/storageKey';
+import { useAuthStore } from '../../../stores/authStore';
 import Text from '../../commons/Text';
 import Title from '../../commons/Title';
 import MainContainer from './MainContainer';
 
 const StatusPage = ({ children }) => {
-  const nickname = JSON.parse(localStorage.getItem(AUTH_STORAGE)).state.userInfo.nickname;
+  const nickname = useAuthStore((state) => state.userInfo.nickname);
 
   return (
     <MainContainer>
