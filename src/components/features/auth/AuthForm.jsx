@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import AuthInput from './authInput';
+import AuthInput from './AuthInput';
 
 const AuthForm = ({ authFormList, onSubmit, buttonName, errorMessage, placeholder, link }) => {
   return (
