@@ -74,7 +74,7 @@ const CreatePlanCreated = ({ detailPlans, setDetailPlans, onHandleDeleteMarker }
           <Button type="button" theme="primary" onClick={handleCancel}>
             취소
           </Button>
-          <Button type="submit" theme="secondary" className="w-1/4">
+          <Button type="submit" theme="secondary" className="w-1/4 min-w-fit">
             저장하기
           </Button>
         </div>
