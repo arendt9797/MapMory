@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { CREATEPLAN, HOME, MYPLAN } from '../../constants/pagePaths';
 import { supabase } from '../../lib/apis/supabaseClient';
 import { useQueryClient } from '@tanstack/react-query';
@@ -12,11 +13,21 @@ export const AuthHeader = () => {
       const { error } = await supabase.auth.signOut();
       queryClient.clear();
       if (error) throw error;
-      alert('로그아웃 되었습니다.');
+      Swal.fire({
+        icon: 'success',
+        title: '로그아웃 성공',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#2E4769'
+      });
       navigate(HOME);
     } catch (err) {
-      console.error('로그아웃 중 오류 발생:', err);
-      alert('로그아웃 실패. 다시 시도해주세요.');
+      Swal.fire({
+        icon: 'error',
+        title: '로그아웃 실패',
+        text: `로그아웃 중 오류가 발생했습니다! ${err}`,
+        confirmButtonText: '확인',
+        confirmButtonColor: '#2E4769'
+      });
     }
   };
   return (

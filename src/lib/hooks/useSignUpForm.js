@@ -3,6 +3,8 @@ import { supabase } from '../apis/supabaseClient';
 import { useNavigate } from 'react-router-dom';
 import { authValidate } from '../utils/authValidate';
 import { EMAIL, NICKNAME } from '../../constants/formFields';
+import { HOME } from '../../constants/pagePaths';
+import Swal from 'sweetalert2';
 
 const useSignUpForm = () => {
   const navigate = useNavigate();
@@ -64,7 +66,14 @@ const useSignUpForm = () => {
     e.preventDefault();
 
     if (!isValidForm()) {
-      return alert('입력하신 정보를 다시 확인해주세요.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: '입력하신 정보가 올바르지 않습니다. 다시 확인해주세요.',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#2E4769'
+      });
+      return;
     }
 
     const { error } = await supabase.auth.signUp({
@@ -78,11 +87,21 @@ const useSignUpForm = () => {
     });
 
     if (error) {
-      return alert('회원가입 실패! 다시 시도해주세요.');
+      return Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: `회원가입 실패, 입력된 정보를 다시 확인해 주세요!`,
+        confirmButtonText: '확인',
+        confirmButtonColor: '#2E4769'
+      });
     }
-
-    alert('회원가입 성공! 로그인 페이지로 이동합니다.');
-    navigate('/signIn');
+    Swal.fire({
+      icon: 'success',
+      title: '회원가입 성공!',
+      text: `회원가입 성공! 자동으로 로그인 됩니다!`,
+      confirmButtonText: '확인',
+      confirmButtonColor: '#2E4769'
+    }).then(() => navigate(HOME));
   };
 
   return { signUpFormData, errorMessage, isDuplicateChecked, handleSignUpChange, handleSignUpSubmit, checkDuplicate };
