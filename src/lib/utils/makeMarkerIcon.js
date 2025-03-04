@@ -18,7 +18,7 @@ export const makeConfirmedIcon = (number) => {
             ${number}
             <div style="
               position: absolute;
-              bottom: -10px;
+              bottom: -8px;
               left: 50%;
               transform: translateX(-50%);
               width: 0;
@@ -50,7 +50,7 @@ export const makeTempIcon = () => {
             ?
             <div style="
               position: absolute;
-              bottom: -10px;
+              bottom: -8px;
               left: 50%;
               transform: translateX(-50%);
               width: 0;
@@ -60,4 +60,21 @@ export const makeTempIcon = () => {
               border-top: 10px solid gray;
             "></div>
           </div>`;
+};
+
+export const myLocationIcon = () => {
+  return `
+            <div style="position: relative;  padding: 10px; background-color: #67BCC4; color: white; font-size: 14px; font-weight: bold; border-radius: 10px; text-align: center;">
+              내위치
+              <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid #67BCC4;"></div>
+            </div>
+          `;
+};
+
+export const addLocationIcon = () => {
+  return `
+          <div style="width: 60px; height: 60px; border:3px dashed #486284; background-color: #67BCC4; color: white; display: flex;justify-content: center; align-items: center; border-radius: 50%; font-size: 14px; font-weight: bold; text-align:center;">
+            여기로<br>갈까요?
+          </div>
+        `;
 };

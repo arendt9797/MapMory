@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { CREATEPLAN } from '../constants/pagePaths';
 import Button from '../components/commons/Button';
 import useLocationStore from '../stores/locationStore';
-import { mapCreateFile } from '../constants/naverMap';
+import { homeMarkerFile, mapCreateFile } from '../constants/naverMap';
+import { addLocationIcon, myLocationIcon } from '../lib/utils/makeMarkerIcon';
 
 const HomePage = () => {
   const mapRef = useRef(null);
@@ -10,6 +11,7 @@ const HomePage = () => {
   const [address, setAddress] = useState({});
   const { setSelectedLocation } = useLocationStore();
   const [isLoading, setIsLoading] = useState(true);
+  const markerRef = useRef(null);
 
   useEffect(() => {
     //내위치
@@ -34,7 +36,11 @@ const HomePage = () => {
       //마커 표시
       new window.naver.maps.Marker({
         position: new window.naver.maps.LatLng(location.lat, location.lng),
-        map: naverMap
+        map: naverMap,
+        icon: {
+          content: myLocationIcon(),
+          anchor: new window.naver.maps.Point(homeMarkerFile.ANCHORPOINT_X, homeMarkerFile.ANCHORPOINT_Y)
+        }
       });
       //클릭이벤트
       window.naver.maps.Event.addListener(naverMap, 'click', (e) => {
@@ -51,6 +57,19 @@ const HomePage = () => {
             setAddress(address);
           }
         );
+        if (markerRef.current) {
+          markerRef.current.setMap(null);
+        }
+        // 새 마커 추가
+        const newMarker = new window.naver.maps.Marker({
+          position: latlng,
+          map: naverMap,
+          icon: {
+            content: addLocationIcon(),
+            anchor: new window.naver.maps.Point(homeMarkerFile.ANCHORPOINT_X, homeMarkerFile.ANCHORPOINT_Y)
+          }
+        });
+        markerRef.current = newMarker;
       });
     }
   }, [location, setSelectedLocation]);
