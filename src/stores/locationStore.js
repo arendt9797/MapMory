@@ -1,8 +1,9 @@
 import { create } from 'zustand';
 
-const locationStore = create((set) => ({
-  selectedLocation: {},
-  setSelectedLocation: (lat, lng) => set({ selectedLocation: lat, lng })
+let selectedLocation = { lat: null, lng: null };
+const useLocationStore = create((set) => ({
+  selectedLocation: { ...selectedLocation },
+  setSelectedLocation: (lat, lng) => set({ selectedLocation: { lat, lng } })
 }));
 
-export default locationStore;
+export default useLocationStore;
