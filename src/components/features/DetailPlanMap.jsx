@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useNaverMapInitializer, useNaverMapObject } from '../../lib/hooks/useDetailMapcreate';
 import { markerFile, planMapFile, polylineFile } from '../../constants/naverMap';
+import { makeConfirmedIcon } from '../../lib/utils/makeMarkerIcon';
 
 const DetailPlanMap = ({ detailPlans, setMarkerMemo }) => {
   const map = useNaverMapObject(); // 생성된 map mapRef에 전달
@@ -28,20 +29,8 @@ const DetailPlanMap = ({ detailPlans, setMarkerMemo }) => {
           position: coord,
           value: plan.plan_memo,
           icon: {
-            content: `<div style="
-                    background-color: white;
-                    border: 2px solid black;
-                    padding: 6px;
-                    border-radius: 50%;
-                    font-weight: bold;
-                    font-size: 14px;
-                    width: 30px;
-                    height: 30px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                  ">${index + 1}</div>`,
-            anchor: new naver.maps.Point(markerFile.ANCHORPOINT, markerFile.ANCHORPOINT)
+            content: makeConfirmedIcon(index + 1),
+            anchor: new naver.maps.Point(markerFile.ANCHORPOINT_X, markerFile.ANCHORPOINT_Y)
           }
         })
       };
