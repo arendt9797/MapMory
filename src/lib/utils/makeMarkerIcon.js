@@ -18,7 +18,7 @@ export const makeConfirmedIcon = (number) => {
             ${number}
             <div style="
               position: absolute;
-              bottom: -10px;
+              bottom: -8px;
               left: 50%;
               transform: translateX(-50%);
               width: 0;
@@ -50,7 +50,7 @@ export const makeTempIcon = () => {
             ?
             <div style="
               position: absolute;
-              bottom: -10px;
+              bottom: -8px;
               left: 50%;
               transform: translateX(-50%);
               width: 0;
