@@ -1,7 +1,4 @@
-// import { Link } from 'react-router-dom';
-
-import { useState } from 'react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CREATEPLAN } from '../constants/pagePaths';
 import Button from '../components/commons/Button';
 import useLocationStore from '../stores/locationStore';
