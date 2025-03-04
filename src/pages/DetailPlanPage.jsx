@@ -9,6 +9,7 @@ const DetailPlanPage = () => {
   const { id } = useParams();
   const [plan, setPlan] = useState({});
   const [detailPlans, setDetailPlans] = useState([]);
+  const [markerMemo, setMarkerMemo] = useState('');
   let day = 0;
 
   // params에 해당하는 plan 호출
@@ -35,7 +36,12 @@ const DetailPlanPage = () => {
   return (
     <div>
       <h2>{plan.title}</h2>
-      {detailPlans.length > 0 ? <DetailPlanMap detailPlans={detailPlans} /> : `지도 정보를 불러오고 있습니다.`}
+      {detailPlans.length > 0 ? (
+        <DetailPlanMap detailPlans={detailPlans} setMarkerMemo={setMarkerMemo} />
+      ) : (
+        `지도 정보를 불러오고 있습니다.`
+      )}
+      <div>{markerMemo}</div>
       <div>
         <div>
           <ul>
