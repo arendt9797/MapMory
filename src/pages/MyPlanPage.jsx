@@ -5,12 +5,11 @@ import StatusPage from '../components/features/myPlanPage/StatusPage';
 import Button from '../components/commons/Button';
 import { AUTH_STORAGE, AUTH_TOKEN } from '../constants/storageKey';
 import useMyPlan from '../lib/hooks/useMyPlan';
+import { useAuthStore } from '../stores/authStore';
 
 const MyPlanPage = () => {
-  const nickname = JSON.parse(localStorage.getItem(AUTH_STORAGE)).state.userInfo.nickname;
-  const userId = JSON.parse(localStorage.getItem(AUTH_TOKEN)).user.id;
-
-  const { data, error, fetchNextPage, hasNextPage, isFetching, isLoading } = useMyPlan(userId);
+  const nickname = useAuthStore((state) => state.userInfo.nickname);
+  const { data, error, fetchNextPage, hasNextPage, isFetching, isLoading } = useMyPlan();
 
   if (error) {
     return <StatusPage>오류가 발생했습니다.</StatusPage>;
