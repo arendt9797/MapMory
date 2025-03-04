@@ -1,12 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { CREATEPLAN, HOME, MYPLAN } from '../../constants/pagePaths';
 import { supabase } from '../../lib/apis/supabaseClient';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const AuthHeader = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const handleLogout = async () => {
     try {
       const { error } = await supabase.auth.signOut();
+      queryClient.clear();
       if (error) throw error;
       alert('로그아웃 되었습니다.');
       navigate(HOME);
