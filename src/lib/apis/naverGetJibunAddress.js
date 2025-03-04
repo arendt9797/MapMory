@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 // 좌표 → 주소 변환
 export const getJibunAddress = async (tempMarker) => {
   const { naver } = window;
@@ -10,7 +12,13 @@ export const getJibunAddress = async (tempMarker) => {
       },
       function (status, response) {
         if (status !== naver.maps.Service.Status.OK) {
-          alert('주소를 가져오지 못했습니다.');
+          Swal.fire({
+            icon: 'error',
+            title: '주소 조회 실패!',
+            text: `주소를 가져오는 도중 에러가 발생했습니다.`,
+            confirmButtonText: '확인',
+            confirmButtonColor: '#2E4769'
+          });
           return reject('주소 조회 실패');
         }
         const addresses = response.v2.address;
