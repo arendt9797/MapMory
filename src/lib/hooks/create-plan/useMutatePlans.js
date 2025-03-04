@@ -12,6 +12,7 @@ export const useMutatePlans = (setDetailPlans, setPlanTitle) => {
     mutationFn: mutatePlans,
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_KEYS.DETAILPLANSDATA]);
+      queryClient.invalidateQueries([QUERY_KEYS.PLANS]);
       alert("저장 완료!");
       setDetailPlans([]); // 일정 목록 초기화
       setPlanTitle(""); // 계획 이름 초기화
