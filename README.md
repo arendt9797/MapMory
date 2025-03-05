@@ -1,4 +1,5 @@
-## ![header-logo](https://github.com/user-attachments/assets/d757aa18-56dd-4fb1-ae19-3b622a983b90) MapMory
+![header-logo](https://github.com/user-attachments/assets/d757aa18-56dd-4fb1-ae19-3b622a983b90) 
+## MapMory
 
 맵모리는 지도로 기억하자! 라는 말장난을 이용한 이름입니다. <br/>
 사용자는 **여행계획**을 **지도**에 **표시**하고 **기억**할 수 있는 온라인 플랫폼 입니다.
