@@ -18,10 +18,13 @@ const DetailPlanPage = () => {
   useEffect(() => {
     if (planData) {
       setPlan(planData);
-      const sortByDate = [...planData.detail_plans].sort((a, b) => a.plan_date.localeCompare(b.plan_date));
-      const sortByTime = [...sortByDate].sort((a, b) => a.plan_time.localeCompare(b.plan_time));
+      const sortedDetailPlans = [...planData.detail_plans].sort((a, b) => {
+        const dateA = new Date(`${a.plan_date} ${a.plan_time}`);
+        const dateB = new Date(`${b.plan_date} ${b.plan_time}`);
+        return dateA - dateB;
+      });
 
-      setDetailPlans(sortByTime);
+      setDetailPlans(sortedDetailPlans);
     }
   }, [id, planData]);
 
