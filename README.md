@@ -1,4 +1,5 @@
 <p align='center'>
+ <img src='https://capsule-render.vercel.app/api?type=waving&color=97D4DA'>
  <img src='https://github.com/user-attachments/assets/c0854b36-1cc3-43d2-8ebd-6cacf609acee'>
 </p>
 
